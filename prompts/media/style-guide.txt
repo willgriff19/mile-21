@@ -1,0 +1,34 @@
+Brand: Mile 21. Audience: serious road runners (10k–marathon) who hate gym-bro preworkouts.
+Positioning: “Equipment for your bloodstream.” Anti-adrenaline chaos. Oxygen delivery + calm relentless focus.
+
+Visual language:
+- Stark, minimal, technical, editorial. Looks like lab equipment + road markings.
+- Avoid supplement clichés (explosions, neon, muscle imagery, gym scenes).
+
+Color palette (STRICT):
+- Void background: #09090B
+- Card/tarmac: #18181B
+- Line/borders: #27272A
+- Primary text: #FAFAFA
+- Secondary text: #A1A1AA
+- Muted text: #52525B
+- Redline accent (CTA + key data only): #FF3B30
+- Oxygen signal accent (icons/checks only): #22D3EE
+
+Typography:
+- Headline vibe: painted road stencil / road marking. Condensed, heavy, tight tracking.
+- Technical text vibe: monospace, uppercase labels, precise.
+
+Content rules:
+- Use redline ONLY for CTAs + key numeric data (e.g. “6.0g”, “100mg”, “$45”).
+- Use oxygen cyan ONLY for checkmarks/icons.
+- Keep everything else monochrome.
+
+Negative constraints:
+- No photoreal product jar, no lifestyle photos, no gradients/glow/3D.
+- No additional colors beyond the palette.
+- No medical claims. Use “supports” language.
+
+Output format:
+- Prefer clean poster/label layouts, vector/print feel.
+- High contrast, readable, minimal.

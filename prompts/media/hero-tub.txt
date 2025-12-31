@@ -1,0 +1,35 @@
+Generate a high-definition photorealistic studio render of a standalone performance supplement tub.
+
+Subject:
+- One standard 30-serving pre-workout tub (cylindrical plastic canister with screw-on lid).
+- Matte black tub + matte black label.
+- Label design is premium, minimal, technical. “Equipment for your bloodstream.” Anti gym-bro.
+
+Background:
+- Solid #09090B to blend seamlessly with the website.
+
+Logo:
+- Use the provided reference logo image EXACTLY. Place it prominently on the label.
+
+Label content (must look real):
+- Product name: RUNNER'S HIGH
+- Batch callout: BATCH #001
+- Callouts for stack (monospace style):
+  - L-CITRULLINE 6.0g
+  - BEET JUICE POWDER 4.0g
+  - RED SPINACH EXTRACT 1.0g
+  - L-THEANINE 200mg
+  - CAFFEINE 100mg
+  - ELECTROLYTES 500mg Na / 500mg K
+- Include a small “UTAH EXCLUSIVE” stamp.
+- Include typical label elements subtly (net weight, servings, warning line) without clutter.
+
+Lighting / composition:
+- Clean studio lighting, soft rim light to reveal shape.
+- Slight 3/4 angle, centered.
+- Subtle shadow on the background; keep it very dark so it blends.
+
+Constraints:
+- No extra colors beyond palette.
+- No additional objects.
+- No background gradients.

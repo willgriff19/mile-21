@@ -1,0 +1,28 @@
+Design a bold, minimal, high-contrast poster for a performance running supplement brand called MILE[21].
+
+Style: "equipment for your bloodstream", serious road running, anti gym-bro. Editorial + technical manifest. Stark, minimal, brutal clarity.
+
+Color palette ONLY:
+- background: near-black #09090B
+- main text: off-white #FAFAFA
+- secondary text: gray #A1A1AA
+- accent 1: redline #FF3B30 (use sparingly for emphasis)
+- accent 2: oxygen cyan #22D3EE (use sparingly for signal/check)
+
+Typography feel:
+- Condensed heavy road-marking headline vibe (painted road stencil). Tight tracking. Big.
+- Monospace for specs.
+
+Copy to include:
+- THE ANTIDOTE TO THE WALL.
+- FULLY DISCLOSED // BATCH #001
+- OXYGEN > ADRENALINE
+
+Composition:
+- Large wordmark MILE[21]
+- 3 spec bullets with tiny icons: OXYGEN DRIVE, SMART SPEED, ZERO DRAG
+- Include a small "UTAH EXCLUSIVE" stamp.
+
+Output:
+- Clean, print-like, no gradients, no photorealism, no 3D.
+- Looks like a premium label / lab manifest.

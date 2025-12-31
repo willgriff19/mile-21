@@ -1,0 +1,10 @@
+Create a clean, flat logo reference image only.
+
+Background: #09090B
+Logo text: MILE[21]
+- MILE[ in #FAFAFA
+- 21] in #FF3B30
+
+Style: heavy condensed road-marking stencil vibe. Tight tracking. Crisp edges.
+No extra text. No texture. No gradients. No shadows.
+Centered.

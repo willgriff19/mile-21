@@ -1,0 +1,24 @@
+Brand: Mile 21. Audience: serious road runners (10k–marathon) who hate gym-bro preworkouts.
+Positioning: “Equipment for your bloodstream.”
+
+For THIS asset only: photorealistic product render is allowed.
+
+Palette + integration constraints (STRICT):
+- Background must match site background exactly: #09090B (solid, no vignette)
+- Tub and label are matte black / near-black. Use only subtle material highlights.
+- Allowed accent colors ONLY on the label: #FAFAFA (text), #A1A1AA (secondary), #52525B (muted), #FF3B30 (redline), #22D3EE (signal)
+
+Logo:
+- Use provided reference image as the exact lockup.
+- Place it prominently on the label.
+
+Negative constraints:
+- No neon, no flames, no gym imagery, no energy drink vibe.
+- No extra colors.
+- No fake supplement buzzwords.
+- No glossy candy look.
+
+Output:
+- High-definition, photorealistic studio render.
+- Single tub centered, slight 3/4 angle.
+- Soft realistic shadows and reflections that still blend into #09090B.

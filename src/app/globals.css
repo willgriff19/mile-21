@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Figma tokens */
+  --dark: #09090b;
+  --void-lite: #18181b;
+  --void-extra-light: #27272a;
+  --red: #ff3b30;
+  --light: #fafafa;
+  --callouts: #22d3ee;
+
+  /* Legacy brand palette (kept for compatibility while old code is removed) */
+  --brand-red: var(--red);
+  --brand-void: var(--dark);
+  --brand-tarmac: var(--void-lite);
+  --brand-line: var(--void-extra-light);
+  --text-primary: var(--light);
+  --text-secondary: #a1a1aa;
+  --text-muted: #52525b;
+  --brand-signal: var(--callouts);
+
+  color-scheme: dark;
+  background-color: var(--void-lite);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--void-lite);
+  color: var(--light);
+  font-family: var(--font-sans), system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+    Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Prevent white flash on WebGL canvas before init */
+canvas {
+  background: transparent !important;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Spotlight cursor helper (disabled on touch by component logic) */
+.spotlight-surface {
+  position: relative;
+}
+.spotlight-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    520px circle at var(--spot-x, 50%) var(--spot-y, 40%),
+    rgba(34, 211, 238, 0.10),
+    transparent 55%
+  );
+  opacity: var(--spot-opacity, 0);
+  transition: opacity 180ms ease;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

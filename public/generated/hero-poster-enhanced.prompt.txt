@@ -1,0 +1,19 @@
+VOID BACKGROUND. Stark product poster.
+
+LARGE ROADMARKING HEADLINE: MILE[21]. Color: #FAFAFA. Extremely condensed, heavy stencil font, tight tracking.
+
+SUBHEAD: THE ANTIDOTE TO THE WALL. Color: #FAFAFA. Below MILE[21].
+
+BELOW SUBHEAD: FULLY DISCLOSED // BATCH #001. Color: #A1A1AA. Monospace font.
+
+THREE BULLET POINTS, stacked vertically. Left-aligned.
+
+BULLET 1: OXYGEN DRIVE. Color: #FAFAFA. To the left of "OXYGEN DRIVE", a small oxygen cyan #22D3EE checkmark icon.
+BULLET 2: SMART SPEED. Color: #FAFAFA. To the left of "SMART SPEED", a small oxygen cyan #22D3EE checkmark icon.
+BULLET 3: ZERO DRAG. Color: #FAFAFA. To the left of "ZERO DRAG", a small oxygen cyan #22D3EE checkmark icon.
+
+All bullet point text in a clean sans-serif.
+
+BOTTOM RIGHT CORNER: "UTAH EXCLUSIVE" stamp. Color: #A1A1AA. Simple, industrial font. Small.
+
+NO gradients, NO glows, NO photorealism, NO 3D elements. ONLY flat colors from the approved palette. NO additional colors. No product jar. No lifestyle imagery.
