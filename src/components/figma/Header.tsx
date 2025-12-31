@@ -2,9 +2,17 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { motion, useScroll, useSpring } from "framer-motion";
+import MagneticWrapper from "../ui/MagneticWrapper";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +30,11 @@ export function Header() {
           : "bg-transparent"
       }`}
     >
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="absolute left-0 right-0 top-0 h-[2px] origin-left bg-[var(--callouts)]"
+        style={{ scaleX }}
+      />
       <div className="mx-auto flex h-14 max-w-[1440px] items-center justify-between px-4 md:h-16 md:px-8 lg:px-12">
         {/* Logo */}
         <Link
@@ -62,12 +75,14 @@ export function Header() {
         </nav>
 
         {/* CTA Button */}
-        <a
-          href="#order"
-          className="flex h-9 items-center justify-center border-2 border-[var(--callouts)] bg-[var(--callouts)] px-5 font-mono text-[12px] font-black uppercase tracking-widest text-[var(--dark)] transition-all duration-200 hover:scale-105 hover:border-[var(--light)] hover:bg-[var(--light)] hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] md:h-11 md:px-7 md:text-[14px]"
-        >
-          Order Now →
-        </a>
+        <MagneticWrapper>
+          <a
+            href="#order"
+            className="flex h-9 items-center justify-center border-2 border-[var(--callouts)] bg-[var(--callouts)] px-5 font-mono text-[12px] font-black uppercase tracking-widest text-[var(--dark)] transition-all duration-200 hover:scale-105 hover:border-[var(--light)] hover:bg-[var(--light)] hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] md:h-11 md:px-7 md:text-[14px]"
+          >
+            Order Now →
+          </a>
+        </MagneticWrapper>
       </div>
     </header>
   );

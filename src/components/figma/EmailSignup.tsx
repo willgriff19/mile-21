@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import MagneticWrapper from "../ui/MagneticWrapper";
 
 export function EmailSignup() {
   const [email, setEmail] = useState("");
@@ -77,12 +78,14 @@ export function EmailSignup() {
                     className="h-12 w-full border border-[var(--void-extra-light)] bg-[var(--dark)] px-4 font-sans text-[14px] text-[var(--light)] placeholder:text-[var(--light)]/30 focus:border-[var(--callouts)] focus:outline-none focus:ring-1 focus:ring-[var(--callouts)]"
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="flex h-12 w-full items-center justify-center border-2 border-[var(--callouts)] bg-[var(--callouts)] font-mono text-[14px] font-black uppercase tracking-widest text-[var(--dark)] transition-all duration-200 hover:scale-105 hover:border-[var(--light)] hover:bg-[var(--light)] hover:shadow-[0_0_30px_rgba(34,211,238,0.4)] md:h-14 md:text-[16px]"
-                >
-                  Sign Up Now →
-                </button>
+                <MagneticWrapper>
+                  <button
+                    type="submit"
+                    className="flex h-12 w-full items-center justify-center border-2 border-[var(--callouts)] bg-[var(--callouts)] font-mono text-[14px] font-black uppercase tracking-widest text-[var(--dark)] transition-all duration-200 hover:scale-105 hover:border-[var(--light)] hover:bg-[var(--light)] hover:shadow-[0_0_30px_rgba(34,211,238,0.4)] md:h-14 md:text-[16px]"
+                  >
+                    Sign Up Now →
+                  </button>
+                </MagneticWrapper>
                 <p className="font-sans text-[11px] text-[var(--light)] opacity-50">
                   No spam. Unsubscribe anytime. We respect your inbox.
                 </p>

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Header } from "./Header";
 import { EmailSignup } from "./EmailSignup";
 import { Footer } from "./Footer";
+import MagneticWrapper from "../ui/MagneticWrapper";
 
 const CaretDown = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -168,37 +169,54 @@ function IngredientRow({ data, isOpen, onToggle }: IngredientRowProps) {
             {data.amount}
           </div>
           {/* Triangle with hover pop effect */}
-          <div
-            className={`flex w-3 items-center justify-center transition-all duration-200 ease-out sm:w-4 ${
-              isOpen ? "rotate-180" : ""
-            } group-hover:scale-125 group-hover:drop-shadow-[0_0_6px_rgba(34,211,238,0.6)]`}
+          <motion.div
+            animate={{ rotate: isOpen ? 180 : 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              damping: 10,
+              mass: 1
+            }}
+            className="flex w-3 items-center justify-center sm:w-4 group-hover:scale-125 group-hover:drop-shadow-[0_0_6px_rgba(34,211,238,0.6)]"
           >
             <CaretDown className="h-2 w-3 text-[var(--callouts)] sm:h-[9px] sm:w-[14px]" />
-          </div>
+          </motion.div>
         </div>
       </button>
 
       {/* Dropdown content with animation */}
-      <div
-        className={`overflow-hidden transition-all duration-300 ease-out ${
-          isOpen ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="bg-[var(--void-extra-light)] px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-5">
-          <p
-            className="font-archivo font-bold italic text-[var(--callouts)]"
-            style={{ fontSize: "clamp(0.6875rem, 1.3vw, 0.875rem)" }}
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 80,
+              damping: 12,
+              mass: 1,
+              opacity: { duration: 0.2 }
+            }}
+            className="overflow-hidden"
           >
-            {data.headline}
-          </p>
-          <p
-            className="mt-2 font-sans leading-relaxed text-[var(--light)] opacity-90"
-            style={{ fontSize: "clamp(0.625rem, 1.2vw, 0.875rem)" }}
-          >
-            {data.description}
-          </p>
-        </div>
-      </div>
+            <div className="bg-[var(--void-extra-light)] px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-5">
+              <p
+                className="font-archivo font-bold italic text-[var(--callouts)]"
+                style={{ fontSize: "clamp(0.6875rem, 1.3vw, 0.875rem)" }}
+              >
+                {data.headline}
+              </p>
+              <p
+                className="mt-2 font-sans leading-relaxed text-[var(--light)] opacity-90"
+                style={{ fontSize: "clamp(0.625rem, 1.2vw, 0.875rem)" }}
+              >
+                {data.description}
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -459,7 +477,7 @@ export function Mobile() {
                   textShadow: "3px 3px 0px rgba(0,0,0,0.9)",
                 }}
               >
-                <span className="mb-4 block whitespace-nowrap opacity-90" style={{ fontSize: "0.6em" }}>
+                <span className="mb-4 block whitespace-nowrap opacity-90" style={{ fontSize: "0.4em" }}>
                   <span className="font-normal">When your legs say </span>
                   <span className="italic">stop.</span>
                 </span>
@@ -477,12 +495,14 @@ export function Mobile() {
               </p>
 
               {/* CTA */}
-              <a
-                href="#order"
-                className="mt-10 inline-flex h-12 w-full max-w-[320px] items-center justify-center border-2 border-[var(--callouts)] bg-[var(--callouts)] px-10 font-mono text-[14px] font-black uppercase tracking-widest text-[var(--dark)] transition-all duration-200 hover:scale-105 hover:border-[var(--light)] hover:bg-[var(--light)] hover:shadow-[0_0_30px_rgba(34,211,238,0.4)] sm:mt-12 sm:h-16 sm:text-[16px]"
-              >
-                Get Mile 21 →
-              </a>
+              <MagneticWrapper>
+                <a
+                  href="#order"
+                  className="mt-10 inline-flex h-12 w-full max-w-[320px] items-center justify-center border-2 border-[var(--callouts)] bg-[var(--callouts)] px-10 font-mono text-[14px] font-black uppercase tracking-widest text-[var(--dark)] transition-all duration-200 hover:scale-105 hover:border-[var(--light)] hover:bg-[var(--light)] hover:shadow-[0_0_30px_rgba(34,211,238,0.4)] sm:mt-12 sm:h-16 sm:text-[16px]"
+                >
+                  Get Mile 21 →
+                </a>
+              </MagneticWrapper>
             </div>
 
             {/* Right Column - Product Image Placeholder */}
