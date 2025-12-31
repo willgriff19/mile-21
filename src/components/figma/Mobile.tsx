@@ -292,6 +292,19 @@ function ScienceCarousel() {
                 return (
                   <motion.div
                     key={`${slideIndex}-${index + offset}`}
+                    drag={isActive ? "x" : false}
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.2}
+                    onDragEnd={(_, { offset, velocity }) => {
+                      const swipe = Math.abs(offset.x) > 50 || Math.abs(velocity.x) > 500;
+                      if (swipe) {
+                        if (offset.x > 0) {
+                          setIndex(index - 1);
+                        } else {
+                          setIndex(index + 1);
+                        }
+                      }
+                    }}
                     initial={{ 
                       x: offset * 100 + "%",
                       scale: isActive ? 1 : 0.85,
@@ -315,7 +328,7 @@ function ScienceCarousel() {
                       damping: 30,
                       opacity: { duration: 0.2 }
                     }}
-                    className="absolute w-[85%] max-w-[600px] cursor-pointer"
+                    className={`absolute w-[85%] max-w-[600px] ${isActive ? "cursor-grab active:cursor-grabbing" : "cursor-pointer"}`}
                     onClick={() => {
                       if (offset !== 0) setIndex(index + offset);
                     }}
