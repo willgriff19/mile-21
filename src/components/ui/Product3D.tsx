@@ -1,13 +1,9 @@
 "use client";
 
-import { useRef, Suspense, useMemo } from "react";
+import { useRef, Suspense, useLayoutEffect } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { 
-  PerspectiveCamera, 
   Environment, 
-  Float,
-  ContactShadows,
-  Center,
   Html,
   Stage,
   OrbitControls
@@ -30,8 +26,10 @@ function Loader() {
 function Model({ obj }: { obj: THREE.Group }) {
   const meshRef = useRef<THREE.Group>(null);
 
-  // Apply texture with high-quality settings
-  useMemo(() => {
+  // Apply texture and fix material orientation
+  useLayoutEffect(() => {
+    if (!obj) return;
+
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load('/assets/product-texture.png');
     texture.colorSpace = THREE.SRGBColorSpace;
@@ -68,16 +66,17 @@ function Model({ obj }: { obj: THREE.Group }) {
 }
 
 function Scene() {
-  // Use MTL loader but override with our custom material in the Model component
   const materials = useLoader(MTLLoader, "/assets/product.mtl");
   const obj = useLoader(OBJLoader, "/assets/product.obj", (loader) => {
     materials.preload();
     loader.setMaterials(materials);
   });
 
+  if (!obj) return null;
+
   return (
     <Stage 
-      intensity={0.8} // Harsh lighting restored
+      intensity={0.8} 
       preset="rembrandt"
       environment="studio" 
       adjustCamera={1.2} 
