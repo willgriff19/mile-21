@@ -27,11 +27,20 @@ function Loader() {
   );
 }
 
-function Model({ obj }: { obj: THREE.Group }) {
+function Model() {
   const meshRef = useRef<THREE.Group>(null);
+  
+  // Load materials and object inside the component so they suspend together
+  const materials = useLoader(MTLLoader, "/assets/product.mtl");
+  const obj = useLoader(OBJLoader, "/assets/product.obj", (loader) => {
+    materials.preload();
+    loader.setMaterials(materials);
+  });
 
   // Apply texture with high-quality settings
   useMemo(() => {
+    if (!obj) return;
+    
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load('/assets/product-texture.png');
     texture.colorSpace = THREE.SRGBColorSpace;
@@ -45,9 +54,10 @@ function Model({ obj }: { obj: THREE.Group }) {
         child.castShadow = true;
         child.receiveShadow = true;
         
+        // Create a new material to ensure we have full control over lighting and textures
         child.material = new THREE.MeshStandardMaterial({
           map: texture,
-          roughness: 0.5, // Slightly rougher to reduce overblown highlights
+          roughness: 0.5,
           metalness: 0.1,
           side: THREE.FrontSide,
         });
@@ -62,37 +72,21 @@ function Model({ obj }: { obj: THREE.Group }) {
   );
 }
 
-function Scene() {
-  const materials = useLoader(MTLLoader, "/assets/product.mtl");
-  const obj = useLoader(OBJLoader, "/assets/product.obj", (loader) => {
-    materials.preload();
-    loader.setMaterials(materials);
-  });
-
-  return (
-    <Stage 
-      intensity={0.4} // Significantly reduced lighting intensity
-      preset="studio" // Changed back to studio for softer lighting
-      environment="city" 
-      adjustCamera={1.2} 
-      shadows={{ type: 'contact', opacity: 0.3, blur: 3 }}
-    >
-      <Model obj={obj} />
-    </Stage>
-  );
-}
-
 export default function Product3D() {
   return (
     <div className="h-[350px] w-full sm:h-[450px] lg:h-[550px]">
       <Canvas shadows dpr={[1, 2]} gl={{ antialias: true }}>
         <Suspense fallback={<Loader />}>
-          <Scene />
-          {/* 
-            OrbitControls restricted to prevent seeing the back:
-            - minAzimuthAngle / maxAzimuthAngle: limits left/right rotation
-            - minPolarAngle / maxPolarAngle: limits up/down rotation
-          */}
+          <Stage 
+            intensity={0.4} 
+            preset="studio" 
+            environment="city" 
+            adjustCamera={1.2} 
+            shadows={{ type: 'contact', opacity: 0.3, blur: 3 }}
+          >
+            <Model />
+          </Stage>
+          
           <OrbitControls 
             enableZoom={false} 
             enablePan={false}
@@ -102,7 +96,6 @@ export default function Product3D() {
             // Limit vertical rotation to stay relatively level
             minPolarAngle={Math.PI / 2.2}
             maxPolarAngle={Math.PI / 1.8}
-            // Make it feel responsive to mouse but snaps back
             enableDamping={true}
             dampingFactor={0.05}
           />
