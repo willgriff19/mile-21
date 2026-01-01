@@ -42,13 +42,10 @@ function Model({ obj }: { obj: THREE.Group }) {
         });
       }
     });
-  }, [obj]);
 
-  useFrame(() => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += 0.005; // Auto-spin restored
-    }
-  });
+    // Ensure it's facing forward
+    obj.rotation.y = Math.PI; 
+  }, [obj]);
 
   return <primitive ref={meshRef} object={obj} />;
 }
