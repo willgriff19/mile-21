@@ -6,18 +6,7 @@ import { Header } from "./Header";
 import { EmailSignup } from "./EmailSignup";
 import { Footer } from "./Footer";
 import MagneticWrapper from "../ui/MagneticWrapper";
-import dynamic from "next/dynamic";
 import { ClientOnly } from "../ui/ClientOnly";
-
-const Product3D = dynamic(() => import("../ui/Product3D"), {
-  ssr: false,
-  loading: () => (
-    <div className="flex h-[350px] w-full flex-col items-center justify-center gap-2 sm:h-[450px] lg:h-[500px]">
-      <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--callouts)] border-t-transparent" />
-      <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--callouts)]">Initializing 3D...</p>
-    </div>
-  ),
-});
 
 const CaretDown = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -517,11 +506,28 @@ export function Mobile() {
               </MagneticWrapper>
             </div>
 
-            {/* Right Column - 3D Product Image */}
+            {/* Right Column - Product Image */}
             <div className="order-2 lg:order-2">
-              <ClientOnly>
-                <Product3D />
-              </ClientOnly>
+              <motion.div
+                animate={{
+                  y: [0, -12, 0],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="relative mx-auto w-full max-w-[220px] sm:max-w-[280px] lg:max-w-[340px]"
+              >
+                {/* Subtle shadow beneath the floating tub */}
+                <div className="absolute -bottom-6 left-1/2 h-4 w-4/5 -translate-x-1/2 rounded-[100%] bg-black/40 blur-xl" />
+                
+                <img
+                  src="/assets/product-best.png"
+                  alt="Mile 21 Cherry Ice Pre-Workout"
+                  className="relative z-10 h-auto w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+                />
+              </motion.div>
             </div>
           </div>
 
