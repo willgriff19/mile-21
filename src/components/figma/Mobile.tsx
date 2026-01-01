@@ -456,14 +456,14 @@ export function Mobile() {
       <main className="relative z-10 text-[var(--light)]">
         {/* Fluid container with percentage-based padding */}
         <div
-          className="mx-auto w-full px-5 pb-10 sm:px-8 sm:pb-12 md:px-12 md:pb-16 lg:px-16 lg:pb-20"
+          className="mx-auto w-full px-5 pb-6 sm:px-8 sm:pb-12 md:px-12 md:pb-16 lg:px-16 lg:pb-20"
           style={{
             maxWidth: "min(100%, 1440px)",
-            paddingTop: "clamp(8rem, 20vh, 14rem)",
+            paddingTop: "clamp(5rem, 12vh, 14rem)",
           }}
         >
           {/* Hero Section - Two Column: Headline scales, Image stays stable */}
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="grid items-center gap-6 sm:gap-10 lg:grid-cols-2 lg:gap-16">
             {/* Left Column - Content */}
             <div className="order-1 flex min-w-0 flex-col items-center text-center lg:order-1 lg:items-start lg:text-left">
               {/* Eyebrow */}
@@ -511,7 +511,7 @@ export function Mobile() {
               <img
                 src="/assets/product-best.png"
                 alt="Mile 21 Cherry Ice Pre-Workout"
-                className="h-auto w-full max-w-[450px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] sm:max-w-[650px] lg:max-w-[900px]"
+                className="h-auto w-full max-w-[280px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[900px]"
               />
             </div>
           </div>
