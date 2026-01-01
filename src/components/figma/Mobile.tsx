@@ -6,8 +6,18 @@ import { Header } from "./Header";
 import { EmailSignup } from "./EmailSignup";
 import { Footer } from "./Footer";
 import MagneticWrapper from "../ui/MagneticWrapper";
-import Product3D from "../ui/Product3D";
+import dynamic from "next/dynamic";
 import { ClientOnly } from "../ui/ClientOnly";
+
+const Product3D = dynamic(() => import("../ui/Product3D"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-[350px] w-full flex-col items-center justify-center gap-2 sm:h-[450px] lg:h-[500px]">
+      <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--callouts)] border-t-transparent" />
+      <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--callouts)]">Initializing 3D...</p>
+    </div>
+  ),
+});
 
 const CaretDown = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
