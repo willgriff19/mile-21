@@ -1,13 +1,14 @@
 "use client";
 
-import { useRef, Suspense, useLayoutEffect, useState } from "react";
+import { useRef, Suspense, useLayoutEffect } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { 
   PerspectiveCamera, 
   Environment, 
   ContactShadows,
   Html,
-  OrbitControls
+  useTexture,
+  Center
 } from "@react-three/drei";
 import * as THREE from "three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
@@ -24,85 +25,78 @@ function Loader() {
 }
 
 function Model() {
-  const meshRef = useRef<THREE.Group>(null);
+  const groupRef = useRef<THREE.Group>(null);
   const obj = useLoader(OBJLoader, "/assets/product.obj");
-  const texture = useLoader(THREE.TextureLoader, "/assets/product-texture.png");
+  const texture = useTexture("/assets/product-texture.png");
 
   useLayoutEffect(() => {
     if (!obj || !texture) return;
 
-    // 1. Prepare texture
+    // Fix texture properties for maximum vividness
     texture.colorSpace = THREE.SRGBColorSpace;
     texture.flipY = true; 
     texture.anisotropy = 16;
+    texture.generateMipmaps = true;
+    texture.minFilter = THREE.LinearMipmapLinearFilter;
 
-    // 2. Auto-center and Scale the geometry
-    const box = new THREE.Box3().setFromObject(obj);
-    const center = box.getCenter(new THREE.Vector3());
-    const size = box.getSize(new THREE.Vector3());
-    
-    // Shift model so its center is at [0,0,0]
-    obj.position.x = -center.x;
-    obj.position.y = -center.y;
-    obj.position.z = -center.z;
-
-    // Scale so it fits in a 3-unit box
-    const maxDim = Math.max(size.x, size.y, size.z);
-    const scale = 3.5 / maxDim;
-    obj.scale.setScalar(scale);
-
-    // 3. Apply Materials
     obj.traverse((child) => {
       if (child instanceof THREE.Mesh) {
         child.castShadow = true;
         child.receiveShadow = true;
+        
+        // Use a material that pops more
         child.material = new THREE.MeshStandardMaterial({
           map: texture,
-          roughness: 0.65,
-          metalness: 0.05,
+          color: new THREE.Color(0xffffff),
+          roughness: 0.4,
+          metalness: 0.1,
+          emissive: new THREE.Color(0xffffff),
+          emissiveIntensity: 0.1, // Slight self-illumination to prevent "greyed out" look
+          envMapIntensity: 1.5,
         });
+        child.material.needsUpdate = true;
       }
     });
   }, [obj, texture]);
 
   useFrame((state) => {
-    if (!meshRef.current) return;
+    if (!groupRef.current) return;
     
-    // Smooth mouse interaction
-    const targetY = state.pointer.x * 0.4;
-    const targetX = -state.pointer.y * 0.2;
+    // Smooth mouse interaction restricted to front
+    const targetY = THREE.MathUtils.clamp(state.pointer.x * 0.4, -0.5, 0.5);
+    const targetX = THREE.MathUtils.clamp(-state.pointer.y * 0.2, -0.2, 0.2);
     
-    meshRef.current.rotation.y = THREE.MathUtils.lerp(meshRef.current.rotation.y, targetY, 0.1);
-    meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, targetX, 0.1);
+    groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetY, 0.1);
+    groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetX, 0.1);
   });
 
   return (
-    <group ref={meshRef}>
-      <primitive object={obj} />
+    <group ref={groupRef}>
+      <Center>
+        {/* Adjusted scale to prevent vertical elongation feel */}
+        <primitive object={obj} scale={0.014} />
+      </Center>
     </group>
   );
 }
 
 export default function Product3D() {
   return (
-    <div className="relative h-[350px] w-full sm:h-[450px] lg:h-[550px]">
-      {/* Fallback image shown while 3D loads or if it fails */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-20 transition-opacity duration-1000">
-        <img src="/assets/product-tub.png" alt="" className="h-4/5 w-auto grayscale" />
-      </div>
-
-      <Canvas shadows dpr={[1, 2]} className="relative z-10" gl={{ antialias: true, alpha: true }}>
-        <PerspectiveCamera makeDefault position={[0, 0, 6]} fov={35} />
+    <div className="relative h-[400px] w-full sm:h-[500px] lg:h-[600px]">
+      <Canvas shadows dpr={[1, 2]} gl={{ antialias: true, alpha: true }}>
+        {/* Increased distance and flattened FOV to reduce perspective distortion (elongation) */}
+        <PerspectiveCamera makeDefault position={[0, 0, 7]} fov={25} />
         
-        {/* Stronger lights to ensure visibility */}
-        <ambientLight intensity={1} />
-        <directionalLight position={[5, 5, 5]} intensity={1.5} castShadow />
-        <pointLight position={[-5, 2, -5]} intensity={0.5} />
+        {/* High-intensity studio lighting */}
+        <ambientLight intensity={2.5} />
+        <directionalLight position={[10, 10, 10]} intensity={3} castShadow />
+        <pointLight position={[-10, 5, 10]} intensity={1.5} />
+        <spotLight position={[0, 10, 0]} intensity={2} angle={0.3} penumbra={1} />
         
         <Suspense fallback={<Loader />}>
           <Model />
           <Environment preset="city" />
-          <ContactShadows position={[0, -2, 0]} opacity={0.4} scale={10} blur={2.5} />
+          <ContactShadows position={[0, -1.8, 0]} opacity={0.3} scale={8} blur={3} />
         </Suspense>
       </Canvas>
     </div>
