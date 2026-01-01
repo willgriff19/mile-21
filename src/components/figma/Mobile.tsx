@@ -456,18 +456,17 @@ export function Mobile() {
       <main className="relative z-10 text-[var(--light)]">
         {/* Fluid container with percentage-based padding */}
         <div
-          className="mx-auto w-full px-5 pb-6 sm:px-8 sm:pb-12 md:px-12 md:pb-16 lg:px-16 lg:pb-20"
+          className="mx-auto w-full px-5 pb-0 sm:px-8 md:px-12 lg:px-16 pt-[clamp(3.5rem,8vh,12rem)] lg:pt-44 lg:pb-40"
           style={{
             maxWidth: "min(100%, 1440px)",
-            paddingTop: "clamp(5rem, 12vh, 14rem)",
           }}
         >
           {/* Hero Section - Two Column: Headline scales, Image stays stable */}
-          <div className="grid items-center gap-6 sm:gap-10 lg:grid-cols-2 lg:gap-16">
+          <div className="grid items-center lg:grid-cols-2 lg:gap-16" style={{ gap: "clamp(0.5rem, 3vh, 4rem)" }}>
             {/* Left Column - Content */}
             <div className="order-1 flex min-w-0 flex-col items-center text-center lg:order-1 lg:items-start lg:text-left">
               {/* Eyebrow */}
-              <p className="mb-6 font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--callouts)] sm:mb-8 sm:text-[10px]">
+              <p className="mb-4 font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--callouts)] sm:mb-8 sm:text-[10px]">
                 The Runner&apos;s Pre-Workout
               </p>
 
@@ -478,7 +477,7 @@ export function Mobile() {
                   textShadow: "3px 3px 0px rgba(0,0,0,0.9)",
                 }}
               >
-                <span className="mb-4 block whitespace-nowrap opacity-90" style={{ fontSize: "0.4em" }}>
+                <span className="mb-2 block whitespace-nowrap opacity-90 sm:mb-4" style={{ fontSize: "0.4em" }}>
                   <span className="font-normal">When your legs say </span>
                   <span className="italic">stop.</span>
                 </span>
@@ -489,29 +488,40 @@ export function Mobile() {
 
               {/* Subheadline */}
               <p
-                className="mt-8 max-w-[480px] font-sans leading-relaxed text-[var(--light)] opacity-70 sm:mt-10 lg:mx-0"
+                className="mt-4 max-w-[480px] font-sans leading-relaxed text-[var(--light)] opacity-70 sm:mt-10 lg:mx-0"
                 style={{ fontSize: "clamp(0.875rem, 1.5vw, 1.0625rem)" }}
               >
                 Pre-workout built for endurance—not the weight room.
               </p>
 
               {/* CTA */}
-              <MagneticWrapper>
-                <a
-                  href="#order"
-                  className="mt-10 inline-flex h-12 w-full max-w-[320px] items-center justify-center border-2 border-[var(--callouts)] bg-[var(--callouts)] px-10 font-mono text-[14px] font-black uppercase tracking-widest text-[var(--dark)] transition-all duration-200 hover:scale-105 hover:border-[var(--light)] hover:bg-[var(--light)] hover:shadow-[0_0_30px_rgba(34,211,238,0.4)] sm:mt-12 sm:h-16 sm:text-[16px]"
-                >
-                  Get Mile 21 →
-                </a>
-              </MagneticWrapper>
+              <div className="relative z-20 mt-6 sm:mt-12">
+                <MagneticWrapper>
+                  <a
+                    href="#order"
+                    className="inline-flex h-12 w-full max-w-[320px] items-center justify-center border-2 border-[var(--callouts)] bg-[var(--callouts)] px-10 font-mono text-[14px] font-black uppercase tracking-widest text-[var(--dark)] transition-all duration-200 hover:scale-105 hover:border-[var(--light)] hover:bg-[var(--light)] hover:shadow-[0_0_30px_rgba(34,211,238,0.4)] sm:h-16 sm:text-[16px]"
+                  >
+                    Get Mile 21 →
+                  </a>
+                </MagneticWrapper>
+              </div>
             </div>
 
             {/* Right Column - Product Image */}
-            <div className="order-2 -mt-16 -mb-8 flex items-center justify-center sm:-mt-20 sm:mb-4 md:mb-12 lg:order-2 lg:-mr-32 lg:mt-0 lg:mb-0 lg:justify-end">
+            <div 
+              className="order-2 flex items-center justify-center lg:order-2 lg:-mr-32 lg:justify-end"
+              style={{
+                marginTop: "clamp(-4rem, -8vh, 0rem)",
+                marginBottom: "clamp(-4rem, -8vh, 0rem)"
+              }}
+            >
               <img
                 src="/assets/product-best.png"
                 alt="Mile 21 Cherry Ice Pre-Workout"
-                className="h-auto w-full max-w-[280px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[900px]"
+                className="h-auto w-full"
+                style={{
+                  maxWidth: "clamp(320px, 65vw, 900px)"
+                }}
               />
             </div>
           </div>
@@ -519,10 +529,16 @@ export function Mobile() {
         </div>
 
         {/* Full-width Divider */}
-        <div className="my-10 h-px w-full bg-[var(--void-extra-light)] sm:my-12 md:my-14" />
+        <div 
+          className="h-px w-full bg-[var(--void-extra-light)]" 
+          style={{ 
+            marginTop: "clamp(0.5rem, 2vh, 4rem)",
+            marginBottom: "clamp(1rem, 3vh, 4rem)"
+          }} 
+        />
 
         <div
-          className="mx-auto w-full px-5 pb-10 sm:px-8 sm:pb-12 md:px-12 md:pb-14 lg:px-16"
+          className="mx-auto w-full px-5 pb-10 sm:px-8 md:px-12 lg:px-16"
           style={{ maxWidth: "min(100%, 1440px)" }}
         >
           {/* Stack Section - Ingredients left, Title right on lg+ */}
@@ -576,7 +592,13 @@ export function Mobile() {
         </div>
 
         {/* Full-width Divider */}
-        <div className="my-10 h-px w-full bg-[var(--void-extra-light)] sm:my-12 md:my-14" />
+        <div 
+          className="h-px w-full bg-[var(--void-extra-light)]" 
+          style={{ 
+            marginTop: "clamp(1rem, 3vh, 4rem)",
+            marginBottom: "clamp(1rem, 3vh, 4rem)"
+          }} 
+        />
 
         {/* Science Section */}
         <ScienceCarousel />
