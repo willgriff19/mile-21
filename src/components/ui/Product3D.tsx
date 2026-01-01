@@ -45,8 +45,8 @@ function Model({ obj }: { obj: THREE.Group }) {
         
         child.material = new THREE.MeshStandardMaterial({
           map: texture,
-          roughness: 0.4,
-          metalness: 0.1,
+          roughness: 0.7, // More matte, less "plastic" shine
+          metalness: 0.05,
           side: THREE.FrontSide,
         });
         
@@ -76,11 +76,11 @@ function Scene() {
 
   return (
     <Stage 
-      intensity={0.8} 
-      preset="rembrandt"
-      environment="studio" 
+      intensity={0.4} // Softer overall intensity
+      preset="studio" // Softer light distribution than rembrandt
+      environment="city" 
       adjustCamera={1.2} 
-      shadows={{ type: 'contact', opacity: 0.5, blur: 2 }}
+      shadows={{ type: 'contact', opacity: 0.3, blur: 3 }}
     >
       <Model obj={obj} />
     </Stage>
