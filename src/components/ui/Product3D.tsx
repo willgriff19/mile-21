@@ -10,7 +10,6 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
-import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 
 function Loader() {
   return (
@@ -66,11 +65,8 @@ function Model({ obj }: { obj: THREE.Group }) {
 }
 
 function Scene() {
-  const materials = useLoader(MTLLoader, "/assets/product.mtl");
-  const obj = useLoader(OBJLoader, "/assets/product.obj", (loader) => {
-    materials.preload();
-    loader.setMaterials(materials);
-  });
+  // Loading only the OBJ to avoid the buggy MTL loader
+  const obj = useLoader(OBJLoader, "/assets/product.obj");
 
   if (!obj) return null;
 
