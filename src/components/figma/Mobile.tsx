@@ -456,13 +456,13 @@ export function Mobile() {
       <main className="relative z-10 text-[var(--light)]">
         {/* Fluid container with percentage-based padding */}
         <div
-          className="mx-auto w-full px-5 pb-0 sm:px-8 md:px-12 lg:px-16 pt-[clamp(3.5rem,8vh,12rem)] lg:pt-64 lg:pb-24"
+          className="mx-auto w-full px-5 pb-0 sm:px-8 md:px-12 lg:px-16 pt-[clamp(3.5rem,8vh,12rem)] lg:pt-52 lg:pb-24"
           style={{
             maxWidth: "min(100%, 1440px)",
           }}
         >
           {/* Hero Section - Two Column: Headline scales, Image stays stable */}
-          <div className="grid items-center lg:grid-cols-2 lg:gap-16" style={{ gap: "clamp(0.5rem, 3vh, 4rem)" }}>
+          <div className="grid items-center lg:grid-cols-2 lg:gap-16" style={{ gap: "clamp(1.5rem, 6vh, 4rem)" }}>
             {/* Left Column - Content */}
             <div className="order-1 flex min-w-0 flex-col items-center text-center lg:order-1 lg:items-start lg:text-left">
               {/* Eyebrow */}
@@ -495,7 +495,7 @@ export function Mobile() {
               </p>
 
               {/* CTA */}
-              <div className="relative z-20 mt-6 sm:mt-12">
+              <div className="mt-8 sm:mt-12">
                 <MagneticWrapper>
                   <a
                     href="#order"
@@ -508,13 +508,7 @@ export function Mobile() {
             </div>
 
             {/* Right Column - Product Image */}
-            <div 
-              className="order-2 flex items-center justify-center lg:order-2 lg:-mr-32 lg:justify-end"
-              style={{
-                marginTop: "clamp(-4rem, -8vh, 0rem)",
-                marginBottom: "clamp(-4rem, -8vh, 0rem)"
-              }}
-            >
+            <div className="order-2 flex items-center justify-center lg:order-2 lg:-mr-32 lg:justify-end">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -524,7 +518,7 @@ export function Mobile() {
                   alt="Mile 21 Cherry Ice Pre-Workout"
                   className="h-auto w-full"
                   style={{
-                    maxWidth: "clamp(320px, 65vw, 900px)"
+                    maxWidth: "clamp(280px, 55vw, 900px)"
                   }}
                 />
               </motion.div>
@@ -537,8 +531,8 @@ export function Mobile() {
         <div 
           className="h-px w-full bg-[var(--void-extra-light)]" 
           style={{ 
-            marginTop: "clamp(0.5rem, 2vh, 4rem)",
-            marginBottom: "clamp(1rem, 3vh, 4rem)"
+            marginTop: "clamp(2rem, 6vh, 4rem)",
+            marginBottom: "clamp(2rem, 6vh, 4rem)"
           }} 
         />
 
@@ -600,8 +594,8 @@ export function Mobile() {
         <div 
           className="h-px w-full bg-[var(--void-extra-light)]" 
           style={{ 
-            marginTop: "clamp(1rem, 3vh, 4rem)",
-            marginBottom: "clamp(1rem, 3vh, 4rem)"
+            marginTop: "clamp(2rem, 6vh, 4rem)",
+            marginBottom: "clamp(2rem, 6vh, 4rem)"
           }} 
         />
 
