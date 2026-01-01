@@ -1,0 +1,4 @@
+newmtl mesh_material
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd Gltf_Import.png
