@@ -518,7 +518,7 @@ export function Mobile() {
                   alt="Mile 21 Cherry Ice Pre-Workout"
                   className="h-auto w-full"
                   style={{
-                    maxWidth: "clamp(240px, 40vw, 800px)"
+                    maxWidth: "clamp(240px, 35vw, 550px)"
                   }}
                 />
               </motion.div>
