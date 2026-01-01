@@ -463,7 +463,7 @@ export function Mobile() {
           }}
         >
           {/* Hero Section - Two Column: Headline scales, Image stays stable */}
-          <div className="grid items-center gap-12 lg:grid-cols-[1fr_600px] lg:gap-16">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Left Column - Content */}
             <div className="order-1 flex min-w-0 flex-col items-center text-center lg:order-1 lg:items-start lg:text-left">
               {/* Eyebrow */}
@@ -507,8 +507,8 @@ export function Mobile() {
             </div>
 
             {/* Right Column - Product Image */}
-            <div className="order-2 lg:order-2">
-              <div className="relative mx-auto w-full max-w-[320px] sm:max-w-[500px] lg:max-w-[650px]">
+            <div className="order-2 lg:order-2 lg:justify-self-end">
+              <div className="relative mx-auto w-full max-w-[320px] sm:max-w-[500px] lg:mx-0 lg:max-w-[700px]">
                 {/* Subtle shadow beneath the tub */}
                 <div className="absolute -bottom-4 left-1/2 h-4 w-4/5 -translate-x-1/2 rounded-[100%] bg-black/40 blur-xl" />
                 
