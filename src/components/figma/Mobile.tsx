@@ -507,11 +507,11 @@ export function Mobile() {
             </div>
 
             {/* Right Column - Product Image */}
-            <div className="order-2 flex items-center justify-center lg:order-2 lg:-mr-16 lg:justify-end">
+            <div className="order-2 flex items-center justify-center lg:order-2 lg:-mr-24 lg:justify-end">
               <img
                 src="/assets/product-best.png"
                 alt="Mile 21 Cherry Ice Pre-Workout"
-                className="h-auto w-full max-w-[320px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] sm:max-w-[450px] lg:max-w-[600px]"
+                className="h-auto w-full max-w-[380px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] sm:max-w-[550px] lg:max-w-[750px]"
               />
             </div>
           </div>
