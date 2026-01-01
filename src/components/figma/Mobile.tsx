@@ -462,7 +462,7 @@ export function Mobile() {
           }}
         >
           {/* Hero Section - Two Column: Headline scales, Image stays stable */}
-          <div className="grid items-center lg:grid-cols-2 lg:gap-16" style={{ gap: "clamp(1.5rem, 6vh, 4rem)" }}>
+          <div className="grid items-center lg:grid-cols-2 lg:gap-16" style={{ gap: "clamp(2rem, 8vh, 6rem)" }}>
             {/* Left Column - Content */}
             <div className="order-1 flex min-w-0 flex-col items-center text-center lg:order-1 lg:items-start lg:text-left">
               {/* Eyebrow */}
@@ -472,16 +472,16 @@ export function Mobile() {
 
               {/* Main Headline - Adaptive scaling: wider on mobile, constrained on desktop */}
               <h1
-                className="font-archivo font-black uppercase leading-[1.1] text-[var(--light)] text-[clamp(1.5rem,8.5vw,3.5rem)] lg:text-[clamp(2rem,5.5vw,4.75rem)]"
+                className="max-w-[600px] font-archivo font-black uppercase leading-[1.1] text-[var(--light)] text-[clamp(1.5rem,8.5vw,3.5rem)] lg:text-[clamp(2rem,4.5vw,4.25rem)]"
                 style={{
                   textShadow: "3px 3px 0px rgba(0,0,0,0.9)",
                 }}
               >
-                <span className="mb-2 block whitespace-nowrap opacity-90 sm:mb-4" style={{ fontSize: "0.4em" }}>
+                <span className="mb-2 block opacity-90 sm:mb-4" style={{ fontSize: "0.4em" }}>
                   <span className="font-normal">When your legs say </span>
                   <span className="italic">stop.</span>
                 </span>
-                <span className="block whitespace-nowrap">
+                <span className="block">
                   MILE[<span className="text-[var(--red)]">21</span><span className="text-[var(--red)]">]</span> SAYS <span className="italic">GO.</span>
                 </span>
               </h1>
@@ -518,7 +518,7 @@ export function Mobile() {
                   alt="Mile 21 Cherry Ice Pre-Workout"
                   className="h-auto w-full"
                   style={{
-                    maxWidth: "clamp(240px, 35vw, 550px)"
+                    maxWidth: "clamp(240px, 30vw, 480px)"
                   }}
                 />
               </motion.div>
