@@ -34,7 +34,10 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mile[21] — The Runner’s Pre-Workout",
+  title: {
+    default: "Mile [21]",
+    template: "Mile [21] - %s",
+  },
   description: "Pure oxygen support and flow-state focus—priming your body for miles, not sets.",
 };
 
