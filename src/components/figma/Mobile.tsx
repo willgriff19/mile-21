@@ -507,8 +507,8 @@ export function Mobile() {
             </div>
 
             {/* Right Column - Product Image */}
-            <div className="order-2 lg:order-2 lg:justify-self-end">
-              <div className="relative mx-auto w-full max-w-[320px] sm:max-w-[500px] lg:mx-0 lg:max-w-[700px]">
+            <div className="order-2 lg:order-2">
+              <div className="relative ml-auto mr-0 w-full max-w-[320px] sm:max-w-[500px] lg:max-w-[700px]">
                 {/* Subtle shadow beneath the tub */}
                 <div className="absolute -bottom-4 left-1/2 h-4 w-4/5 -translate-x-1/2 rounded-[100%] bg-black/40 blur-xl" />
                 
