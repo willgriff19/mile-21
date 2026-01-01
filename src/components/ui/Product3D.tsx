@@ -25,7 +25,6 @@ function Loader() {
 function Model({ obj }: { obj: THREE.Group }) {
   const meshRef = useRef<THREE.Group>(null);
 
-  // Apply texture and fix material orientation
   useLayoutEffect(() => {
     if (!obj) return;
 
@@ -44,7 +43,7 @@ function Model({ obj }: { obj: THREE.Group }) {
         
         child.material = new THREE.MeshStandardMaterial({
           map: texture,
-          roughness: 0.7, // More matte, less "plastic" shine
+          roughness: 0.7,
           metalness: 0.05,
           side: THREE.FrontSide,
         });
@@ -54,26 +53,23 @@ function Model({ obj }: { obj: THREE.Group }) {
     });
   }, [obj]);
 
-  useFrame((state) => {
+  useFrame(() => {
     if (!meshRef.current) return;
     meshRef.current.rotation.y += 0.005;
   });
 
-  return (
-    <primitive ref={meshRef} object={obj} />
-  );
+  return <primitive ref={meshRef} object={obj} />;
 }
 
 function Scene() {
-  // Loading only the OBJ to avoid the buggy MTL loader
   const obj = useLoader(OBJLoader, "/assets/product.obj");
 
   if (!obj) return null;
 
   return (
     <Stage 
-      intensity={0.4} // Softer overall intensity
-      preset="studio" // Softer light distribution than rembrandt
+      intensity={0.4} 
+      preset="studio" 
       environment="city" 
       adjustCamera={1.2} 
       shadows={{ type: 'contact', opacity: 0.3, blur: 3 }}
