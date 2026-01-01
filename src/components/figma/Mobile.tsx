@@ -472,12 +472,12 @@ export function Mobile() {
 
               {/* Main Headline - Adaptive scaling: wider on mobile, constrained on desktop */}
               <h1
-                className="font-archivo font-black uppercase leading-[1.1] text-[var(--light)] text-[clamp(1.5rem,8.5vw,3.5rem)] lg:text-[clamp(2rem,4vw,4rem)]"
+                className="font-archivo font-black uppercase leading-[1.1] text-[var(--light)] text-[clamp(1.5rem,8.5vw,3.5rem)] lg:text-[clamp(2rem,5.5vw,4.75rem)]"
                 style={{
                   textShadow: "3px 3px 0px rgba(0,0,0,0.9)",
                 }}
               >
-                <span className="mb-2 block opacity-90 sm:mb-4" style={{ fontSize: "0.4em" }}>
+                <span className="mb-2 block whitespace-nowrap opacity-90 sm:mb-4" style={{ fontSize: "0.4em" }}>
                   <span className="font-normal">When your legs say </span>
                   <span className="italic">stop.</span>
                 </span>
@@ -518,7 +518,7 @@ export function Mobile() {
                   alt="Mile 21 Cherry Ice Pre-Workout"
                   className="h-auto w-full"
                   style={{
-                    maxWidth: "clamp(240px, 25vw, 420px)"
+                    maxWidth: "clamp(240px, 25vw, 100px)"
                   }}
                 />
               </motion.div>
