@@ -1,15 +1,15 @@
 "use client";
 
-import { useRef, Suspense, useLayoutEffect } from "react";
+import { useRef, Suspense } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { 
   Environment, 
   Html,
   Stage,
-  OrbitControls
+  OrbitControls,
+  useOBJ
 } from "@react-three/drei";
 import * as THREE from "three";
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 
 function Loader() {
   return (
@@ -22,73 +22,29 @@ function Loader() {
   );
 }
 
-function Model({ obj }: { obj: THREE.Group }) {
+function Model() {
+  // useOBJ is the most reliable way in drei to load OBJs
+  const obj = useOBJ("/assets/product.obj");
   const meshRef = useRef<THREE.Group>(null);
 
-  useLayoutEffect(() => {
-    if (!obj) return;
-
-    const textureLoader = new THREE.TextureLoader();
-    const texture = textureLoader.load('/assets/product-texture.png');
-    texture.colorSpace = THREE.SRGBColorSpace;
-    texture.flipY = true; 
-    texture.minFilter = THREE.LinearFilter;
-    texture.magFilter = THREE.LinearFilter;
-    texture.anisotropy = 16;
-
-    obj.traverse((child) => {
-      if (child instanceof THREE.Mesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-        
-        child.material = new THREE.MeshStandardMaterial({
-          map: texture,
-          roughness: 0.7,
-          metalness: 0.05,
-          side: THREE.FrontSide,
-        });
-        
-        child.material.needsUpdate = true;
-      }
-    });
-  }, [obj]);
-
   useFrame(() => {
-    if (!meshRef.current) return;
-    meshRef.current.rotation.y += 0.005;
+    if (meshRef.current) {
+      meshRef.current.rotation.y += 0.005;
+    }
   });
 
   return <primitive ref={meshRef} object={obj} />;
 }
 
-function Scene() {
-  const obj = useLoader(OBJLoader, "/assets/product.obj");
-
-  if (!obj) return null;
-
-  return (
-    <Stage 
-      intensity={0.4} 
-      preset="studio" 
-      environment="city" 
-      adjustCamera={1.2} 
-      shadows={{ type: 'contact', opacity: 0.3, blur: 3 }}
-    >
-      <Model obj={obj} />
-    </Stage>
-  );
-}
-
 export default function Product3D() {
   return (
     <div className="h-[350px] w-full sm:h-[450px] lg:h-[550px]">
-      <Canvas shadows dpr={[1, 2]} gl={{ antialias: true }}>
+      <Canvas shadows dpr={[1, 2]}>
         <Suspense fallback={<Loader />}>
-          <Scene />
-          <OrbitControls 
-            enableZoom={false} 
-            enablePan={false}
-          />
+          <Stage intensity={0.5} environment="city" adjustCamera={1.2}>
+            <Model />
+          </Stage>
+          <OrbitControls enableZoom={false} enablePan={false} />
         </Suspense>
       </Canvas>
     </div>
