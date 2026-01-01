@@ -515,21 +515,19 @@ export function Mobile() {
                 marginBottom: "clamp(-4rem, -8vh, 0rem)"
               }}
             >
-              <MagneticWrapper>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                  <img
-                    src="/assets/product-best.png"
-                    alt="Mile 21 Cherry Ice Pre-Workout"
-                    className="h-auto w-full"
-                    style={{
-                      maxWidth: "clamp(320px, 65vw, 900px)"
-                    }}
-                  />
-                </motion.div>
-              </MagneticWrapper>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <img
+                  src="/assets/product-best.png"
+                  alt="Mile 21 Cherry Ice Pre-Workout"
+                  className="h-auto w-full"
+                  style={{
+                    maxWidth: "clamp(320px, 65vw, 900px)"
+                  }}
+                />
+              </motion.div>
             </div>
           </div>
 
