@@ -456,7 +456,7 @@ export function Mobile() {
       <main className="relative z-10 text-[var(--light)]">
         {/* Fluid container with percentage-based padding */}
         <div
-          className="mx-auto w-full px-5 pb-0 sm:px-8 md:px-12 lg:px-16 pt-[clamp(3.5rem,8vh,12rem)] lg:pt-44 lg:pb-40"
+          className="mx-auto w-full px-5 pb-0 sm:px-8 md:px-12 lg:px-16 pt-[clamp(3.5rem,8vh,12rem)] lg:pt-64 lg:pb-24"
           style={{
             maxWidth: "min(100%, 1440px)",
           }}
@@ -515,14 +515,21 @@ export function Mobile() {
                 marginBottom: "clamp(-4rem, -8vh, 0rem)"
               }}
             >
-              <img
-                src="/assets/product-best.png"
-                alt="Mile 21 Cherry Ice Pre-Workout"
-                className="h-auto w-full"
-                style={{
-                  maxWidth: "clamp(320px, 65vw, 900px)"
-                }}
-              />
+              <MagneticWrapper>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  <img
+                    src="/assets/product-best.png"
+                    alt="Mile 21 Cherry Ice Pre-Workout"
+                    className="h-auto w-full"
+                    style={{
+                      maxWidth: "clamp(320px, 65vw, 900px)"
+                    }}
+                  />
+                </motion.div>
+              </MagneticWrapper>
             </div>
           </div>
 
@@ -538,7 +545,7 @@ export function Mobile() {
         />
 
         <div
-          className="mx-auto w-full px-5 pb-10 sm:px-8 md:px-12 lg:px-16"
+          className="mx-auto w-full px-5 pb-0 sm:px-8 md:px-12 lg:px-16"
           style={{ maxWidth: "min(100%, 1440px)" }}
         >
           {/* Stack Section - Ingredients left, Title right on lg+ */}
