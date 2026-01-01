@@ -1,10 +1,8 @@
 "use client";
 
-import { useRef, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useRef, Suspense, useMemo } from "react";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { 
-  useOBJ, 
-  useMTL, 
   PerspectiveCamera, 
   Environment, 
   Float,
@@ -12,35 +10,51 @@ import {
   Center
 } from "@react-three/drei";
 import * as THREE from "three";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
+import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 
 function Scene() {
-  const materials = useMTL("/assets/product.mtl");
-  const obj = useOBJ("/assets/product.obj");
+  const materials = useLoader(MTLLoader, "/assets/product.mtl");
+  
+  const obj = useLoader(OBJLoader, "/assets/product.obj", (loader) => {
+    materials.preload();
+    loader.setMaterials(materials);
+  });
+
   const meshRef = useRef<THREE.Group>(null);
 
-  // Apply materials to the OBJ
-  obj.traverse((child) => {
-    if (child instanceof THREE.Mesh) {
-      child.material = materials.materials[Object.keys(materials.materials)[0]];
-      // If the texture isn't loading automatically from MTL, we can force it:
-      // const texture = new THREE.TextureLoader().load('/assets/product-texture.png');
-      // child.material.map = texture;
-    }
-  });
+  // Apply texture if the MTL doesn't handle it perfectly or to ensure it's there
+  useMemo(() => {
+    const texture = new THREE.TextureLoader().load('/assets/product-texture.png');
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.flipY = false; // Often needed for OBJ models
+
+    obj.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        if (child.material) {
+          // If it's an array of materials
+          if (Array.isArray(child.material)) {
+            child.material.forEach(m => {
+              if (m.map === null) m.map = texture;
+            });
+          } else {
+            if (child.material.map === null) child.material.map = texture;
+          }
+        }
+      }
+    });
+  }, [obj]);
 
   useFrame((state) => {
     if (!meshRef.current) return;
     // Slow auto-rotation
     meshRef.current.rotation.y += 0.005;
-    
-    // Gentle floating
-    meshRef.current.position.y = Math.sin(state.clock.elapsedTime) * 0.1;
   });
 
   return (
     <Center>
       <group ref={meshRef}>
-        <primitive object={obj} scale={0.012} />
+        <primitive object={obj} scale={0.015} />
       </group>
     </Center>
   );
@@ -51,8 +65,8 @@ export default function Product3D() {
     <div className="h-[300px] w-full sm:h-[400px] lg:h-[450px]">
       <Canvas shadows dpr={[1, 2]}>
         <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={35} />
-        <ambientLight intensity={0.7} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
+        <ambientLight intensity={0.8} />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1.5} castShadow />
         <pointLight position={[-10, -10, -10]} intensity={0.5} />
         
         <Suspense fallback={null}>
@@ -72,4 +86,3 @@ export default function Product3D() {
     </div>
   );
 }
-
