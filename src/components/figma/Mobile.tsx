@@ -508,7 +508,7 @@ export function Mobile() {
             </div>
 
             {/* Right Column - Product Image */}
-            <div className="order-2 flex items-center justify-center lg:order-2 lg:-mr-32 lg:justify-end">
+            <div className="order-2 flex items-center justify-center lg:order-2">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -518,7 +518,7 @@ export function Mobile() {
                   alt="Mile 21 Cherry Ice Pre-Workout"
                   className="h-auto w-full"
                   style={{
-                    maxWidth: "clamp(280px, 55vw, 900px)"
+                    maxWidth: "clamp(240px, 40vw, 800px)"
                   }}
                 />
               </motion.div>
