@@ -8,7 +8,9 @@ import {
   Float,
   ContactShadows,
   Center,
-  Html
+  Html,
+  Stage,
+  OrbitControls
 } from "@react-three/drei";
 import * as THREE from "three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
@@ -25,14 +27,7 @@ function Loader() {
   );
 }
 
-function Scene() {
-  const materials = useLoader(MTLLoader, "/assets/product.mtl");
-  
-  const obj = useLoader(OBJLoader, "/assets/product.obj", (loader) => {
-    materials.preload();
-    loader.setMaterials(materials);
-  });
-
+function Model({ obj }: { obj: THREE.Group }) {
   const meshRef = useRef<THREE.Group>(null);
 
   // Apply texture and ensure materials are visible
@@ -44,14 +39,13 @@ function Scene() {
 
     obj.traverse((child) => {
       if (child instanceof THREE.Mesh) {
-        // Ensure the mesh is visible and has a material
         child.castShadow = true;
         child.receiveShadow = true;
         
         if (child.material) {
           const mats = Array.isArray(child.material) ? child.material : [child.material];
           mats.forEach(m => {
-            if (m instanceof THREE.MeshStandardMaterial || m instanceof THREE.MeshPhongMaterial) {
+            if ('map' in m) {
               m.map = texture;
               m.needsUpdate = true;
             }
@@ -67,36 +61,40 @@ function Scene() {
   });
 
   return (
-    <Center top>
-      <group ref={meshRef}>
-        {/* Adjusted scale to be more likely visible - OBJ scales vary wildly */}
-        <primitive object={obj} scale={0.8} />
-      </group>
-    </Center>
+    <primitive ref={meshRef} object={obj} />
+  );
+}
+
+function Scene() {
+  const materials = useLoader(MTLLoader, "/assets/product.mtl");
+  const obj = useLoader(OBJLoader, "/assets/product.obj", (loader) => {
+    materials.preload();
+    loader.setMaterials(materials);
+  });
+
+  return (
+    <Stage 
+      intensity={0.5} 
+      environment="city" 
+      adjustCamera={1.2} 
+      shadows={{ type: 'contact', opacity: 0.4, blur: 2 }}
+    >
+      <Model obj={obj} />
+    </Stage>
   );
 }
 
 export default function Product3D() {
   return (
-    <div className="h-[350px] w-full sm:h-[450px] lg:h-[500px]">
+    <div className="h-[350px] w-full sm:h-[450px] lg:h-[550px]">
       <Canvas shadows dpr={[1, 2]}>
-        <PerspectiveCamera makeDefault position={[0, 1, 5]} fov={40} />
-        <ambientLight intensity={1} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} castShadow />
-        <pointLight position={[-10, 10, -10]} intensity={1} />
-        <directionalLight position={[0, 5, 5]} intensity={1} />
-        
         <Suspense fallback={<Loader />}>
-          <Float speed={2} rotationIntensity={0.3} floatIntensity={0.4}>
-            <Scene />
-          </Float>
-          <Environment preset="city" />
-          <ContactShadows 
-            position={[0, -1.8, 0]} 
-            opacity={0.5} 
-            scale={10} 
-            blur={2} 
-            far={4} 
+          <Scene />
+          <OrbitControls 
+            enableZoom={false} 
+            enablePan={false}
+            minPolarAngle={Math.PI / 2.5}
+            maxPolarAngle={Math.PI / 1.5}
           />
         </Suspense>
       </Canvas>
