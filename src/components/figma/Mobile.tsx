@@ -508,26 +508,16 @@ export function Mobile() {
 
             {/* Right Column - Product Image */}
             <div className="order-2 lg:order-2">
-              <motion.div
-                animate={{
-                  y: [0, -12, 0],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="relative mx-auto w-full max-w-[220px] sm:max-w-[280px] lg:max-w-[340px]"
-              >
-                {/* Subtle shadow beneath the floating tub */}
-                <div className="absolute -bottom-6 left-1/2 h-4 w-4/5 -translate-x-1/2 rounded-[100%] bg-black/40 blur-xl" />
+              <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[360px] lg:max-w-[480px]">
+                {/* Subtle shadow beneath the tub */}
+                <div className="absolute -bottom-4 left-1/2 h-4 w-4/5 -translate-x-1/2 rounded-[100%] bg-black/40 blur-xl" />
                 
                 <img
                   src="/assets/product-best.png"
                   alt="Mile 21 Cherry Ice Pre-Workout"
                   className="relative z-10 h-auto w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
                 />
-              </motion.div>
+              </div>
             </div>
           </div>
 
