@@ -9,12 +9,10 @@ import {
   ContactShadows,
   Center,
   Html,
-  Stage,
   OrbitControls
 } from "@react-three/drei";
 import * as THREE from "three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
-import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 
 function Loader() {
   return (
@@ -30,23 +28,15 @@ function Loader() {
 function Model() {
   const meshRef = useRef<THREE.Group>(null);
   
-  // Load materials and object inside the component so they suspend together
-  const materials = useLoader(MTLLoader, "/assets/product.mtl");
-  const obj = useLoader(OBJLoader, "/assets/product.obj", (loader) => {
-    materials.preload();
-    loader.setMaterials(materials);
-  });
+  // Load ONLY the OBJ and Texture - bypassing the buggy MTL file entirely
+  const obj = useLoader(OBJLoader, "/assets/product.obj");
+  const texture = useLoader(THREE.TextureLoader, "/assets/product-texture.png");
 
-  // Apply texture with high-quality settings
   useMemo(() => {
-    if (!obj) return;
+    if (!obj || !texture) return;
     
-    const textureLoader = new THREE.TextureLoader();
-    const texture = textureLoader.load('/assets/product-texture.png');
     texture.colorSpace = THREE.SRGBColorSpace;
     texture.flipY = true; 
-    texture.minFilter = THREE.LinearFilter;
-    texture.magFilter = THREE.LinearFilter;
     texture.anisotropy = 16;
 
     obj.traverse((child) => {
@@ -54,10 +44,9 @@ function Model() {
         child.castShadow = true;
         child.receiveShadow = true;
         
-        // Create a new material to ensure we have full control over lighting and textures
         child.material = new THREE.MeshStandardMaterial({
           map: texture,
-          roughness: 0.5,
+          roughness: 0.4,
           metalness: 0.1,
           side: THREE.FrontSide,
         });
@@ -65,10 +54,15 @@ function Model() {
         child.material.needsUpdate = true;
       }
     });
-  }, [obj]);
+  }, [obj, texture]);
 
   return (
-    <primitive ref={meshRef} object={obj} />
+    <primitive 
+      ref={meshRef} 
+      object={obj} 
+      scale={0.012} // Adjusted scale for OBJ
+      rotation={[0, 0, 0]} // Ensure it starts facing forward
+    />
   );
 }
 
@@ -76,24 +70,33 @@ export default function Product3D() {
   return (
     <div className="h-[350px] w-full sm:h-[450px] lg:h-[550px]">
       <Canvas shadows dpr={[1, 2]} gl={{ antialias: true }}>
+        <PerspectiveCamera makeDefault position={[0, 0.5, 5]} fov={35} />
+        <ambientLight intensity={0.6} />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
+        <pointLight position={[-10, 5, -10]} intensity={0.5} />
+        
         <Suspense fallback={<Loader />}>
-          <Stage 
-            intensity={0.4} 
-            preset="studio" 
-            environment="city" 
-            adjustCamera={1.2} 
-            shadows={{ type: 'contact', opacity: 0.3, blur: 3 }}
-          >
-            <Model />
-          </Stage>
+          <Center top>
+            <Float speed={2} rotationIntensity={0.2} floatIntensity={0.3}>
+              <Model />
+            </Float>
+          </Center>
+          
+          <Environment preset="city" />
+          
+          <ContactShadows 
+            position={[0, -1.8, 0]} 
+            opacity={0.4} 
+            scale={10} 
+            blur={2.5} 
+            far={4} 
+          />
           
           <OrbitControls 
             enableZoom={false} 
             enablePan={false}
-            // Limit horizontal rotation to +/- 45 degrees from front
             minAzimuthAngle={-Math.PI / 4}
             maxAzimuthAngle={Math.PI / 4}
-            // Limit vertical rotation to stay relatively level
             minPolarAngle={Math.PI / 2.2}
             maxPolarAngle={Math.PI / 1.8}
             enableDamping={true}
