@@ -463,7 +463,7 @@ export function Mobile() {
           }}
         >
           {/* Hero Section - Two Column: Headline scales, Image stays stable */}
-          <div className="grid items-center gap-12 lg:grid-cols-[1fr_300px] lg:gap-16">
+          <div className="grid items-center gap-12 lg:grid-cols-[1fr_450px] lg:gap-16">
             {/* Left Column - Content */}
             <div className="order-1 flex min-w-0 flex-col items-center text-center lg:order-1 lg:items-start lg:text-left">
               {/* Eyebrow */}
