@@ -505,20 +505,28 @@ export function Mobile() {
               </MagneticWrapper>
             </div>
 
-            {/* Right Column - Product Image Placeholder */}
+            {/* Right Column - Product Image */}
             <div className="order-2 lg:order-2">
-              <div className="relative mx-auto aspect-square w-full max-w-[180px] border-2 border-dashed border-[var(--void-extra-light)] bg-[var(--void-lite)] sm:max-w-[220px] lg:max-w-[300px]">
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                  <div className="mb-3 text-[var(--callouts)] opacity-30">
-                    <svg className="h-10 w-10 md:h-12 md:w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                    </svg>
-                  </div>
-                  <p className="font-mono text-[8px] uppercase tracking-wider text-[var(--light)] opacity-30 md:text-[9px]">
-                    Product Image
-                  </p>
-                </div>
-              </div>
+              <motion.div
+                animate={{
+                  y: [0, -12, 0],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="relative mx-auto w-full max-w-[220px] sm:max-w-[280px] lg:max-w-[340px]"
+              >
+                {/* Subtle shadow beneath the floating tub */}
+                <div className="absolute -bottom-6 left-1/2 h-4 w-4/5 -translate-x-1/2 rounded-[100%] bg-black/40 blur-xl" />
+                
+                <img
+                  src="/assets/product-tub.png"
+                  alt="Mile 21 Cherry Ice Pre-Workout"
+                  className="relative z-10 h-auto w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+                />
+              </motion.div>
             </div>
           </div>
 
