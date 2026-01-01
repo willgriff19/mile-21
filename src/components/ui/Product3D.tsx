@@ -19,9 +19,9 @@ import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 function Loader() {
   return (
     <Html center>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-2 whitespace-nowrap">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--callouts)] border-t-transparent" />
-        <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--callouts)]">Loading 3D...</p>
+        <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--callouts)]">Loading 3D Texture...</p>
       </div>
     </Html>
   );
@@ -30,27 +30,39 @@ function Loader() {
 function Model({ obj }: { obj: THREE.Group }) {
   const meshRef = useRef<THREE.Group>(null);
 
-  // Apply texture and ensure materials are visible
+  // Apply texture with high-quality settings
   useMemo(() => {
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load('/assets/product-texture.png');
     texture.colorSpace = THREE.SRGBColorSpace;
-    texture.flipY = false;
+    
+    // OBJ textures often need Y flipped back and forth depending on export
+    texture.flipY = true; 
+    
+    // Improved filtering
+    texture.minFilter = THREE.LinearFilter;
+    texture.magFilter = THREE.LinearFilter;
+    texture.anisotropy = 16;
 
     obj.traverse((child) => {
       if (child instanceof THREE.Mesh) {
         child.castShadow = true;
         child.receiveShadow = true;
         
-        if (child.material) {
-          const mats = Array.isArray(child.material) ? child.material : [child.material];
-          mats.forEach(m => {
-            if ('map' in m) {
-              m.map = texture;
-              m.needsUpdate = true;
-            }
-          });
-        }
+        // Replace existing material with a high-quality Standard material
+        // This handles lighting MUCH better than the default OBJ materials
+        const oldMat = Array.isArray(child.material) ? child.material[0] : child.material;
+        
+        child.material = new THREE.MeshStandardMaterial({
+          map: texture,
+          roughness: 0.4,
+          metalness: 0.1,
+          side: THREE.FrontSide,
+          emissive: new THREE.Color(0x000000),
+          // If the model looks fragmented, try setting transparent: true or alphaTest
+        });
+        
+        child.material.needsUpdate = true;
       }
     });
   }, [obj]);
@@ -66,6 +78,8 @@ function Model({ obj }: { obj: THREE.Group }) {
 }
 
 function Scene() {
+  // We load the MTL to ensure the OBJ is parsed correctly with its sub-objects,
+  // but we'll override the appearance in the Model component for better quality.
   const materials = useLoader(MTLLoader, "/assets/product.mtl");
   const obj = useLoader(OBJLoader, "/assets/product.obj", (loader) => {
     materials.preload();
@@ -74,10 +88,11 @@ function Scene() {
 
   return (
     <Stage 
-      intensity={0.5} 
-      environment="city" 
+      intensity={0.8} 
+      preset="rembrandt"
+      environment="studio" 
       adjustCamera={1.2} 
-      shadows={{ type: 'contact', opacity: 0.4, blur: 2 }}
+      shadows={{ type: 'contact', opacity: 0.5, blur: 2 }}
     >
       <Model obj={obj} />
     </Stage>
@@ -87,7 +102,7 @@ function Scene() {
 export default function Product3D() {
   return (
     <div className="h-[350px] w-full sm:h-[450px] lg:h-[550px]">
-      <Canvas shadows dpr={[1, 2]}>
+      <Canvas shadows dpr={[1, 2]} gl={{ antialias: true }}>
         <Suspense fallback={<Loader />}>
           <Scene />
           <OrbitControls 
