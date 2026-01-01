@@ -507,7 +507,7 @@ export function Mobile() {
             </div>
 
             {/* Right Column - Product Image */}
-            <div className="order-2 -my-16 flex items-center justify-center sm:-my-20 lg:order-2 lg:-mr-32 lg:-my-0 lg:justify-end">
+            <div className="order-2 -mt-16 -mb-32 flex items-center justify-center sm:-mt-20 sm:-mb-40 lg:order-2 lg:-mr-32 lg:-mt-0 lg:-mb-0 lg:justify-end">
               <img
                 src="/assets/product-best.png"
                 alt="Mile 21 Cherry Ice Pre-Workout"
