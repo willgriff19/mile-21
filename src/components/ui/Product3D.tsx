@@ -57,6 +57,18 @@ function Model() {
         child.material.needsUpdate = true;
       }
     });
+
+    // Auto-center and scale the geometry based on its bounding box
+    const box = new THREE.Box3().setFromObject(obj);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = 3.0 / maxDim; // fit nicely in view
+    obj.position.sub(center);
+    obj.scale.setScalar(scale);
+
+    // Face the camera directly
+    obj.rotation.set(0, Math.PI, 0);
   }, [obj, texture]);
 
   useFrame((state) => {
