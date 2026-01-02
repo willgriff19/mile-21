@@ -469,7 +469,7 @@ export function Mobile() {
       <main className="relative z-10 text-[var(--light)]">
         {/* Fluid container with percentage-based padding */}
         <div
-          className="mx-auto w-full px-5 pb-0 sm:px-8 md:px-12 lg:px-16 pt-[clamp(4.25rem,9vh,12rem)] sm:pt-[clamp(3.5rem,8vh,12rem)] lg:pt-52 lg:pb-24"
+          className="mx-auto w-full px-5 pb-0 sm:px-8 md:px-12 lg:px-16 pt-[clamp(5.25rem,10vh,12rem)] sm:pt-[clamp(3.5rem,8vh,12rem)] lg:pt-52 lg:pb-24"
           style={{
             maxWidth: "min(100%, 1440px)",
           }}
