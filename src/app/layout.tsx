@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Archivo, Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { CursorGlow } from "../components/ui/CursorGlow";
+import { PHProvider } from "./providers";
+import PostHogPageView from "./PostHogPageView";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -59,7 +61,10 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        {children}
+        <PHProvider>
+          <PostHogPageView />
+          {children}
+        </PHProvider>
       </body>
     </html>
   );

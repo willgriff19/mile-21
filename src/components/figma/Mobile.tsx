@@ -545,28 +545,33 @@ export function Mobile() {
             {/* Section Title + Trust Badges - appears first on mobile, second on lg */}
             <div className="order-1 lg:order-2 lg:self-center">
               {/* Mobile: Title + badges inline / lg: stacked & centered */}
-              <div className="flex items-center justify-between gap-4 lg:block lg:text-center">
-                <h2
-                  className="font-archivo font-black italic text-[var(--light)]"
-                  style={{
-                    fontSize: "clamp(1.5rem, 4vw, 2.25rem)",
-                    textShadow: "2px 2px 0px rgba(0,0,0,0.8)",
-                  }}
-                >
-                  THE STACK
-                </h2>
-                
-                {/* Trust badges - inline on mobile, stacked & centered on lg */}
-                <div className="flex flex-wrap gap-2 lg:mt-6 lg:flex-col lg:items-center lg:gap-3">
-                  <span className="font-mono text-[8px] uppercase tracking-wider text-[var(--light)] opacity-40 sm:text-[9px] lg:text-[11px]">
-                    ✓ Clinical Dosing
-                  </span>
-                  <span className="font-mono text-[8px] uppercase tracking-wider text-[var(--light)] opacity-40 sm:text-[9px] lg:text-[11px]">
-                    ✓ 3rd Party Tested
-                  </span>
-                  <span className="font-mono text-[8px] uppercase tracking-wider text-[var(--light)] opacity-40 sm:text-[9px] lg:text-[11px]">
-                    ✓ Zero Fillers
-                  </span>
+              <div className="flex flex-col lg:items-center">
+                <p className="mb-2 text-left font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--callouts)] sm:text-[10px] lg:text-center">
+                  What&apos;s Inside
+                </p>
+                <div className="flex w-full items-center justify-between gap-4 lg:block lg:text-center">
+                  <h2
+                    className="font-archivo font-black italic text-[var(--light)]"
+                    style={{
+                      fontSize: "clamp(1.5rem, 4vw, 2.25rem)",
+                      textShadow: "2px 2px 0px rgba(0,0,0,0.8)",
+                    }}
+                  >
+                    THE STACK
+                  </h2>
+                  
+                  {/* Trust badges - inline on mobile, stacked & centered on lg */}
+                  <div className="flex flex-wrap gap-2 lg:mt-6 lg:flex-col lg:items-center lg:gap-3">
+                    <span className="font-mono text-[8px] uppercase tracking-wider text-[var(--light)] opacity-40 sm:text-[9px] lg:text-[11px]">
+                      ✓ Clinical Dosing
+                    </span>
+                    <span className="font-mono text-[8px] uppercase tracking-wider text-[var(--light)] opacity-40 sm:text-[9px] lg:text-[11px]">
+                      ✓ 3rd Party Tested
+                    </span>
+                    <span className="font-mono text-[8px] uppercase tracking-wider text-[var(--light)] opacity-40 sm:text-[9px] lg:text-[11px]">
+                      ✓ Zero Fillers
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
