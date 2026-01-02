@@ -126,14 +126,6 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/athletes"
-                  className="font-sans text-[13px] text-[var(--light)] opacity-60 transition-opacity hover:opacity-100"
-                >
-                  Athletes
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/blog"
                   className="font-sans text-[13px] text-[var(--light)] opacity-60 transition-opacity hover:opacity-100"
                 >

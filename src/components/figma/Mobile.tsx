@@ -448,12 +448,15 @@ export function Mobile() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeCTA, setActiveCTA] = useState<string>("Founding Runner");
+  const [waitlistComplete, setWaitlistComplete] = useState(false);
   const posthog = usePostHog()
 
   const openModal = (ctaType: string) => {
     setActiveCTA(ctaType);
     setIsModalOpen(true);
+    setWaitlistComplete(false);
     posthog.capture('waitlist_modal_opened', { cta_source: ctaType });
+    posthog.capture('modal_viewed', { cta_source: ctaType, modal_type: 'waitlist' });
   };
 
   const handleToggle = (index: number) => {
@@ -551,7 +554,10 @@ export function Mobile() {
           style={{ maxWidth: "min(100%, 1440px)" }}
         >
           {/* Stack Section - Ingredients left, Title right on lg+ */}
-          <div className="grid gap-6 lg:grid-cols-[1fr_240px] lg:gap-10">
+          <div
+            id="formula"
+            className="grid scroll-mt-[100px] gap-6 lg:grid-cols-[1fr_240px] lg:gap-10"
+          >
             {/* Section Title + Trust Badges - appears first on mobile, second on lg */}
             <div className="order-1 lg:order-2 lg:self-center">
               {/* Mobile: Title + badges inline / lg: stacked & centered */}
@@ -588,7 +594,6 @@ export function Mobile() {
 
             {/* Ingredients section - appears second on mobile, first on lg */}
             <section
-              id="formula"
               className="order-2 scroll-mt-[100px] space-y-3 sm:space-y-4 lg:order-1"
               aria-label="Formula"
               data-glow-shy
@@ -639,32 +644,67 @@ export function Mobile() {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="relative w-full max-w-md border border-[var(--void-extra-light)] bg-[var(--void-lite)] p-8 shadow-2xl"
+              className="relative w-full max-w-[440px] overflow-hidden rounded-lg border border-[var(--void-extra-light)] bg-[var(--void-lite)] shadow-2xl"
             >
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="absolute right-4 top-4 text-[var(--light)] opacity-40 hover:opacity-100"
-              >
-                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-
-              <div className="text-center">
-                <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--callouts)]">
-                  Waitlist Only
-                </p>
-                <h2 className="font-archivo text-[24px] font-black italic leading-tight text-[var(--light)]">
-                  MILE[<span className="text-[var(--red)]">21</span>] IS ALMOST HERE
-                </h2>
-                <p className="mt-4 font-sans text-[14px] leading-relaxed text-[var(--light)] opacity-70">
-                  We are currently in final testing. Join the waitlist now to secure{" "}
-                  <span className="font-bold text-[var(--callouts)]">25% off</span> your first order when we launch.
-                </p>
-
-                <div className="mt-8">
-                  <EmailSignup ctaOverride={activeCTA} />
+              {/* Ambient background */}
+              <div className="pointer-events-none absolute inset-0">
+                <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-[var(--callouts)]/15 blur-3xl" />
+                <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-[var(--red)]/12 blur-3xl" />
+                <div className="absolute inset-0 opacity-[0.06] mix-blend-overlay">
+                  <img
+                    src="/assets/paper-grain.svg"
+                    alt=""
+                    className="h-full w-full object-cover"
+                  />
                 </div>
+              </div>
+
+              {!waitlistComplete && (
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="absolute right-4 top-4 z-20 rounded-full border border-[var(--void-extra-light)] bg-black/20 p-2 text-[var(--light)] opacity-70 backdrop-blur-sm transition hover:opacity-100"
+                >
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              )}
+
+              <div className="relative p-8 sm:p-10">
+                {!waitlistComplete && (
+                  <>
+                    <div className="mb-5 flex items-center justify-center gap-2">
+                      <span className="rounded-full border border-white/70 bg-black/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[var(--callouts)] backdrop-blur-sm">
+                        Join the waitlist
+                      </span>
+                    </div>
+
+                    <h2 className="text-center font-archivo text-[34px] font-black italic leading-[0.9] tracking-tight text-[var(--light)]">
+                      SECURE <span className="text-[var(--red)]">20% OFF</span>
+                    </h2>
+
+                    <p className="mt-4 text-center font-sans text-[14px] leading-relaxed text-[var(--light)] opacity-70">
+                      We&apos;re almost ready. Join the waitlist to lock in 20% off and get first dibs when the first batch drops.
+                    </p>
+                  </>
+                )}
+
+                <div className={waitlistComplete ? "mt-0" : "mt-7"}>
+                  <EmailSignup
+                    ctaOverride={activeCTA}
+                    isModal={true}
+                    onModalClose={() => setIsModalOpen(false)}
+                    onSuccess={() => setWaitlistComplete(true)}
+                  />
+                </div>
+
+                {!waitlistComplete && (
+                  <div className="mt-5 flex items-center justify-center gap-2 text-center font-mono text-[10px] uppercase tracking-widest text-[var(--light)] opacity-40">
+                    <span>No spam</span>
+                    <span aria-hidden="true">•</span>
+                    <span>Unsubscribe anytime</span>
+                  </div>
+                )}
               </div>
             </motion.div>
           </div>

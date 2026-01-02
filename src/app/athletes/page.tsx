@@ -1,4 +1,5 @@
 import { InteriorLayout } from "../../components/figma/InteriorLayout";
+import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "Athletes | Mile 21",
@@ -64,6 +65,8 @@ const ATHLETES = [
 ];
 
 export default function AthletesPage() {
+  notFound();
+
   return (
     <InteriorLayout
       title="OUR ATHLETES"
