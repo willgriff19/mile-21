@@ -386,7 +386,7 @@ export function EmailSignup({
               }}
               placeholder="Enter your email"
               required
-              className="h-12 w-full border border-[var(--void-extra-light)] bg-[var(--dark)] px-4 font-sans text-[14px] text-[var(--light)] placeholder:text-[var(--light)]/30 focus:border-[var(--callouts)] focus:outline-none focus:ring-1 focus:ring-[var(--callouts)]"
+              className="h-12 w-full border border-[var(--void-extra-light)] bg-[var(--dark)] px-4 font-sans text-[16px] text-[var(--light)] placeholder:text-[var(--light)]/30 focus:border-[var(--callouts)] focus:outline-none focus:ring-1 focus:ring-[var(--callouts)] sm:text-[14px]"
             />
             <button
               ref={submitBtnRef}
@@ -494,7 +494,7 @@ export function EmailSignup({
                     }}
                     placeholder="runner@example.com"
                     required
-                    className="h-12 w-full border border-[var(--void-extra-light)] bg-[var(--dark)] px-4 font-sans text-[14px] text-[var(--light)] placeholder:text-[var(--light)]/30 focus:border-[var(--callouts)] focus:outline-none focus:ring-1 focus:ring-[var(--callouts)]"
+                    className="h-12 w-full border border-[var(--void-extra-light)] bg-[var(--dark)] px-4 font-sans text-[16px] text-[var(--light)] placeholder:text-[var(--light)]/30 focus:border-[var(--callouts)] focus:outline-none focus:ring-1 focus:ring-[var(--callouts)] sm:text-[14px]"
                   />
                 </div>
                 <MagneticWrapper>
