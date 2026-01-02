@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, useScroll, useSpring } from "framer-motion";
 import MagneticWrapper from "../ui/MagneticWrapper";
 
-export function Header() {
+export function Header({ onCTAClick }: { onCTAClick?: () => void }) {
   const [scrolled, setScrolled] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -76,12 +76,12 @@ export function Header() {
 
         {/* CTA Button */}
         <MagneticWrapper>
-          <a
-            href="#order"
+          <button
+            onClick={() => onCTAClick?.()}
             className="flex h-9 items-center justify-center border-2 border-[var(--callouts)] bg-[var(--callouts)] px-5 font-mono text-[12px] font-black uppercase tracking-widest text-[var(--dark)] transition-all duration-200 hover:scale-105 hover:border-[var(--light)] hover:bg-[var(--light)] hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] md:h-11 md:px-7 md:text-[14px]"
           >
             Order Now →
-          </a>
+          </button>
         </MagneticWrapper>
       </div>
     </header>

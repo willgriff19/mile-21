@@ -4,7 +4,7 @@ import { useState } from "react";
 import MagneticWrapper from "../ui/MagneticWrapper";
 import { usePostHog } from 'posthog-js/react'
 
-export function EmailSignup() {
+export function EmailSignup({ ctaOverride }: { ctaOverride?: string }) {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -21,9 +21,9 @@ export function EmailSignup() {
       posthog.identify(email, {
         email: email,
         signup_date: new Date().toISOString(),
-        source: 'footer_signup'
+        source: ctaOverride || 'footer_signup'
       });
-      posthog.capture('email_signup_submitted');
+      posthog.capture('email_signup_submitted', { cta: ctaOverride || 'Founding Runner' });
       
       const distinctId = posthog.get_distinct_id();
 
@@ -35,7 +35,8 @@ export function EmailSignup() {
         },
         body: JSON.stringify({ 
           email,
-          distinctId 
+          distinctId,
+          cta: ctaOverride || 'Founding Runner'
         }),
       });
 

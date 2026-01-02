@@ -7,6 +7,7 @@ import { EmailSignup } from "./EmailSignup";
 import { Footer } from "./Footer";
 import MagneticWrapper from "../ui/MagneticWrapper";
 import { ClientOnly } from "../ui/ClientOnly";
+import { usePostHog } from 'posthog-js/react'
 
 const CaretDown = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -445,6 +446,15 @@ function ScienceCarousel() {
 
 export function Mobile() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeCTA, setActiveCTA] = useState<string>("Founding Runner");
+  const posthog = usePostHog()
+
+  const openModal = (ctaType: string) => {
+    setActiveCTA(ctaType);
+    setIsModalOpen(true);
+    posthog.capture('waitlist_modal_opened', { cta_source: ctaType });
+  };
 
   const handleToggle = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));
@@ -452,7 +462,7 @@ export function Mobile() {
 
   return (
     <>
-      <Header />
+      <Header onCTAClick={() => openModal("Navigation Bar")} />
       <main className="relative z-10 text-[var(--light)]">
         {/* Fluid container with percentage-based padding */}
         <div
@@ -497,12 +507,12 @@ export function Mobile() {
               {/* CTA */}
               <div className="mt-8 sm:mt-12">
                 <MagneticWrapper>
-                  <a
-                    href="#order"
+                  <button
+                    onClick={() => openModal("Hero")}
                     className="inline-flex h-12 w-full max-w-[320px] items-center justify-center border-2 border-[var(--callouts)] bg-[var(--callouts)] px-10 font-mono text-[14px] font-black uppercase tracking-widest text-[var(--dark)] transition-all duration-200 hover:scale-105 hover:border-[var(--light)] hover:bg-[var(--light)] hover:shadow-[0_0_30px_rgba(34,211,238,0.4)] sm:h-16 sm:text-[16px]"
                   >
                     Get Mile 21 →
-                  </a>
+                  </button>
                 </MagneticWrapper>
               </div>
             </div>
@@ -608,8 +618,58 @@ export function Mobile() {
         <ScienceCarousel />
       </main>
 
-      <EmailSignup />
+      <EmailSignup ctaOverride="Founding Runner" />
       <Footer />
+
+      {/* Waitlist Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsModalOpen(false)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            />
+            
+            {/* Modal Content */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="relative w-full max-w-md border border-[var(--void-extra-light)] bg-[var(--void-lite)] p-8 shadow-2xl"
+            >
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute right-4 top-4 text-[var(--light)] opacity-40 hover:opacity-100"
+              >
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              <div className="text-center">
+                <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--callouts)]">
+                  Waitlist Only
+                </p>
+                <h2 className="font-archivo text-[24px] font-black italic leading-tight text-[var(--light)]">
+                  MILE[<span className="text-[var(--red)]">21</span>] IS ALMOST HERE
+                </h2>
+                <p className="mt-4 font-sans text-[14px] leading-relaxed text-[var(--light)] opacity-70">
+                  We are currently in final testing. Join the waitlist now to secure{" "}
+                  <span className="font-bold text-[var(--callouts)]">25% off</span> your first order when we launch.
+                </p>
+
+                <div className="mt-8">
+                  <EmailSignup ctaOverride={activeCTA} />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
-    const { email, distinctId } = await request.json();
+    const { email, distinctId, cta } = await request.json();
 
     if (!email) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
@@ -34,6 +34,15 @@ export async function POST(request: Request) {
         },
       },
     };
+
+    // Add CTA select field if provided
+    if (cta) {
+      properties['CTA'] = {
+        select: {
+          name: cta,
+        },
+      };
+    }
 
     // Add PostHog Link if distinctId is provided
     if (distinctId && posthogProjectId) {
