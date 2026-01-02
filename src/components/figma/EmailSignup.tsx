@@ -2,16 +2,56 @@
 
 import { useState } from "react";
 import MagneticWrapper from "../ui/MagneticWrapper";
+import { usePostHog } from 'posthog-js/react'
 
 export function EmailSignup() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const posthog = usePostHog()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email) return;
+
+    setLoading(true);
+
+    try {
+      // 1. Identify and capture in PostHog
+      posthog.identify(email, {
+        email: email,
+        signup_date: new Date().toISOString(),
+        source: 'footer_signup'
+      });
+      posthog.capture('email_signup_submitted');
+      
+      const distinctId = posthog.get_distinct_id();
+
+      // 2. Save to Notion via our API route
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          email,
+          distinctId 
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        posthog.capture('email_signup_success');
+      } else {
+        console.error('Failed to submit');
+        // Still set to true for UX if you want, or show an error
+        setSubmitted(true); 
+      }
+    } catch (err) {
+      console.error('Error submitting email:', err);
       setSubmitted(true);
-      // In production, this would send to your email service
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -81,9 +121,10 @@ export function EmailSignup() {
                 <MagneticWrapper>
                   <button
                     type="submit"
-                    className="flex h-12 w-full items-center justify-center border-2 border-[var(--callouts)] bg-[var(--callouts)] font-mono text-[14px] font-black uppercase tracking-widest text-[var(--dark)] transition-all duration-200 hover:scale-105 hover:border-[var(--light)] hover:bg-[var(--light)] hover:shadow-[0_0_30px_rgba(34,211,238,0.4)] md:h-14 md:text-[16px]"
+                    disabled={loading}
+                    className="flex h-12 w-full items-center justify-center border-2 border-[var(--callouts)] bg-[var(--callouts)] font-mono text-[14px] font-black uppercase tracking-widest text-[var(--dark)] transition-all duration-200 hover:scale-105 hover:border-[var(--light)] hover:bg-[var(--light)] hover:shadow-[0_0_30px_rgba(34,211,238,0.4)] disabled:opacity-50 disabled:cursor-not-allowed md:h-14 md:text-[16px]"
                   >
-                    Sign Up Now →
+                    {loading ? "Signing Up..." : "Sign Up Now →"}
                   </button>
                 </MagneticWrapper>
                 <p className="font-sans text-[11px] text-[var(--light)] opacity-50">

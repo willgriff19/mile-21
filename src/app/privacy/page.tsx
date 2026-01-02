@@ -8,9 +8,9 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <InteriorLayout
+      <InteriorLayout
       title="PRIVACY POLICY"
-      subtitle="Last updated: January 1, 2025"
+      subtitle="Last updated: May 22, 2025"
     >
       <section className="space-y-8 font-sans text-[var(--light)] opacity-80">
         <p>
@@ -103,10 +103,13 @@ export default function PrivacyPage() {
           </p>
           <ul className="mt-3 list-inside list-disc space-y-2">
             <li>Remember your preferences and cart contents</li>
-            <li>Understand how you use our Site</li>
+            <li>Understand how you use our Site (via PostHog)</li>
             <li>Deliver relevant advertising</li>
             <li>Analyze Site performance</li>
           </ul>
+          <p className="mt-4">
+            We use <span className="text-[var(--light)] font-bold">PostHog</span> to analyze how visitors interact with our Site. PostHog uses cookies and other tracking technologies to collect information such as your IP address, browser type, device information, and pages visited. This data helps us improve the user experience and optimize our services. For more information on PostHog's privacy practices, please visit the <a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[var(--callouts)] underline">PostHog Privacy Policy</a>.
+          </p>
           <p className="mt-4">
             You can control cookies through your browser settings. Note that
             disabling cookies may affect Site functionality.
