@@ -61,14 +61,14 @@ const SCIENCE_SLIDES: ScienceSlide[] = [
     link: "https://pubmed.ncbi.nlm.nih.gov/26023227/",
   },
   {
-    focus: "COGNITIVE FLOW",
-    headlineStat: "SHARP",
-    result: "REACTION TIME",
-    takeaway: "The 2:1 L-Theanine stack neutralizes caffeine jitters for calm, focused alertness.",
+    focus: "PERCEIVED EXERTION",
+    headlineStat: "5–6%",
+    result: "LESS EXERTION",
+    takeaway: "Caffeine reduces how hard you feel you're working, allowing you to push further with less mental fatigue.",
     proof:
-      "Research shows the 'Golden Ratio' improves both speed and accuracy while reducing susceptibility to distraction.",
-    citation: "Haskell et al., Biol Psychol (2008)",
-    link: "https://pubmed.ncbi.nlm.nih.gov/18006208/",
+      "A meta-analysis of 21 studies found caffeine reduced perceived exertion during exercise by 5.6%, significantly impacting overall performance.",
+    citation: "Doherty et al., Scand J Med Sci Sports (2005)",
+    link: "https://pubmed.ncbi.nlm.nih.gov/15773860/",
   },
   {
     focus: "SPEED & POWER",
@@ -122,18 +122,18 @@ const INGREDIENTS: IngredientData[] = [
       'We pair 100mg of Caffeine (kinetic energy) with 200mg of L-Theanine (calm focus) to neutralize the jitters. The result is "Alpha Wave" focus—alertness without the anxiety or heart rate spikes.',
   },
   {
-    name: "SODIUM",
-    amount: "500MG",
+    name: "ELECTROLYTE MIX",
+    amount: "1000MG",
     headline: "HYDRATION FUEL.",
     description:
-      "Sourced from Pink Himalayan Salt. This 500mg dose replaces exactly what you sweat out, maintaining blood volume to keep your heart rate stable and preventing the muscle cramps that kill late-race performance.",
+      "A precision 1000mg hydration stack. We include 500mg of Potassium Citrate to regulate muscle firing and prevent 'dead legs.' The remaining 500mg is a specific Sodium blend: 333mg of Sodium Citrate for gentle, non-acidic absorption and 167mg of Sodium Chloride for fluid balance. This 2/3 to 1/3 sodium ratio is designed to be easier on the stomach while replacing exactly what you sweat out.",
   },
   {
-    name: "POTASSIUM CITRATE",
-    amount: "500MG",
-    headline: "CRAMP INSURANCE.",
+    name: "GI SUPPORT",
+    amount: "3000MG",
+    headline: "GASTRIC PEACE.",
     description:
-      'While sodium manages fluid, potassium regulates muscle firing. We include a matching 500mg dose to prevent involuntary twitching and that heavy "dead leg" feeling that sets in after Mile 15.',
+      "Built to eliminate mid-run GI distress. We include 3000mg of L-Glutamine to support the gut barrier and a dash of ginger to settle the stomach. This combination ensures your GI system stays calm and your stomach feels good during high-intensity efforts, from the first mile to the finish line.",
   },
 ];
 
@@ -528,7 +528,7 @@ export function Mobile() {
               >
                 <img
                   src="/assets/product-best.png"
-                  alt="Mile 21 Cherry Ice Pre-Workout"
+                  alt="Mile 21 Endurance Pre-Workout for runners - gut-friendly cherry ice formula designed for marathon training"
                   className="h-auto w-full"
                   style={{
                     maxWidth: "clamp(240px, 25vw, 100px)"

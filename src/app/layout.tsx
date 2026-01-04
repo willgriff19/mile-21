@@ -37,10 +37,37 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Mile [21]",
-    template: "Mile [21] - %s",
+    default: "Mile 21 | The First Pre-Workout Engineered for Endurance Running",
+    template: "%s | Mile 21",
   },
-  description: "Pure oxygen support and flow-state focus—priming your body for miles, not sets.",
+  description:
+    "Stop using gym supplements for running. Mile 21 is a gut-friendly, sustained-energy formula designed for the 21st mile. No jitters, no crash. Join the waitlist in Provo, UT.",
+  keywords: [
+    "endurance pre workout",
+    "pre workout for runners",
+    "marathon training supplements",
+    "supplement for runner stomach",
+    "citrulline for running",
+    "non-stimulant energy for runners",
+  ],
+  openGraph: {
+    title: "Mile 21 | The First Pre-Workout Engineered for Endurance Running",
+    description:
+      "Stop using gym supplements for running. Mile 21 is a gut-friendly, sustained-energy formula designed for the 21st mile. No jitters, no crash.",
+    type: "website",
+    locale: "en_US",
+    siteName: "Mile 21",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mile 21 | Pre-Workout for Endurance Running",
+    description:
+      "Stop using gym supplements for running. Mile 21 is a gut-friendly, sustained-energy formula designed for the 21st mile.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
