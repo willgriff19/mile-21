@@ -37,11 +37,11 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Mile 21 | Pre-Workout for Runners",
-    template: "%s | Mile 21",
+    default: "Mile [21] | Pre-Workout for Runners",
+    template: "%s | Mile [21]",
   },
   description:
-    "Stop using gym supplements for running. Mile 21 is a gut-friendly, sustained-energy formula designed for the 21st mile. No jitters, no crash. Join the waitlist in Provo, UT.",
+    "Stop using gym supplements for running. Mile [21] is a gut-friendly, sustained-energy formula designed for the 21st mile. No jitters, no crash. Join the waitlist in Provo, UT.",
   keywords: [
     "endurance pre workout",
     "pre workout for runners",
@@ -51,18 +51,18 @@ export const metadata: Metadata = {
     "non-stimulant energy for runners",
   ],
   openGraph: {
-    title: "Mile 21 | Pre-Workout for Runners",
+    title: "Mile [21] | Pre-Workout for Runners",
     description:
-      "Stop using gym supplements for running. Mile 21 is a gut-friendly, sustained-energy formula designed for the 21st mile. No jitters, no crash.",
+      "Stop using gym supplements for running. Mile [21] is a gut-friendly, sustained-energy formula designed for the 21st mile. No jitters, no crash.",
     type: "website",
     locale: "en_US",
-    siteName: "Mile 21",
+    siteName: "Mile [21]",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mile 21 | Pre-Workout for Runners",
+    title: "Mile [21] | Pre-Workout for Runners",
     description:
-      "Stop using gym supplements for running. Mile 21 is a gut-friendly, sustained-energy formula designed for the 21st mile.",
+      "Stop using gym supplements for running. Mile [21] is a gut-friendly, sustained-energy formula designed for the 21st mile.",
   },
   robots: {
     index: true,
