@@ -15,6 +15,11 @@ const nextConfig = {
         destination: '/?utm_source=tiktok&utm_medium=bio',
         permanent: false,
       },
+      {
+        source: '/order',
+        destination: '/?utm_source=x&utm_medium=bio',
+        permanent: false,
+      },
     ]
   },
 };
