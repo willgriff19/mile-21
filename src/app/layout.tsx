@@ -37,7 +37,7 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Mile 21 | The First Pre-Workout Engineered for Endurance Running",
+    default: "Mile 21 | Pre-Workout for Runners",
     template: "%s | Mile 21",
   },
   description:
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     "non-stimulant energy for runners",
   ],
   openGraph: {
-    title: "Mile 21 | The First Pre-Workout Engineered for Endurance Running",
+    title: "Mile 21 | Pre-Workout for Runners",
     description:
       "Stop using gym supplements for running. Mile 21 is a gut-friendly, sustained-energy formula designed for the 21st mile. No jitters, no crash.",
     type: "website",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mile 21 | Pre-Workout for Endurance Running",
+    title: "Mile 21 | Pre-Workout for Runners",
     description:
       "Stop using gym supplements for running. Mile 21 is a gut-friendly, sustained-energy formula designed for the 21st mile.",
   },
