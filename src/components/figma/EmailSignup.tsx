@@ -86,61 +86,63 @@ export function EmailSignup({
       posthog.identify(email, {
         email: email,
         signup_date: new Date().toISOString(),
-        source: ctaOverride || 'footer_signup'
+        source: ctaOverride || "footer_signup",
       });
       // Track the attempt (success is tracked only on a true 200 OK response)
-      posthog.capture('email_signup_submitted', { cta: ctaOverride || 'Founding Runner', is_modal: isModal });
-      
+      posthog.capture("email_signup_submitted", {
+        cta: ctaOverride || "Founding Runner",
+        is_modal: isModal,
+      });
+
       const distinctId = posthog.get_distinct_id();
 
-      // 2. Save to Notion via our API route
-      const response = await fetch('/api/signup', {
-        method: 'POST',
+      // 2. Start the Notion submission in the background
+      // We don't await this directly to make the UI feel faster
+      const submissionPromise = fetch("/api/signup", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           email,
           distinctId,
-          cta: ctaOverride || 'Founding Runner'
+          cta: ctaOverride || "Founding Runner",
         }),
+      }).then(async (response) => {
+        if (response.ok) {
+          posthog.capture("waitlist_submitted", {
+            cta: ctaOverride || "Founding Runner",
+            is_modal: isModal,
+          });
+          posthog.capture("email_signup_success");
+        } else {
+          console.error("Background submission failed");
+          posthog.capture("email_signup_failed", {
+            cta: ctaOverride || "Founding Runner",
+            is_modal: isModal,
+            status: response.status,
+          });
+        }
+      }).catch((err) => {
+        console.error("Background submission error:", err);
+        posthog.capture("email_signup_failed", {
+          cta: ctaOverride || "Founding Runner",
+          is_modal: isModal,
+          status: "network_error",
+        });
       });
 
-      if (response.ok) {
-        setStatus("success");
-        posthog.capture('waitlist_submitted', { 
-          cta: ctaOverride || 'Founding Runner',
-          is_modal: isModal 
-        });
-        posthog.capture('email_signup_success');
-      } else {
-        let message = "Couldn't add you to the waitlist. Please try again.";
-        try {
-          const data = await response.json();
-          if (typeof data?.error === "string" && data.error.trim()) {
-            message = data.error;
-          }
-        } catch {
-          // ignore JSON parsing errors
-        }
-        console.error('Failed to submit');
-        setStatus("error");
-        setErrorMessage(message);
-        posthog.capture('email_signup_failed', {
-          cta: ctaOverride || 'Founding Runner',
-          is_modal: isModal,
-          status: response.status,
-        });
-      }
+      // 3. Wait for 750ms before showing success
+      // This gives the user a sense of "work" being done without being slow
+      await new Promise((resolve) => setTimeout(resolve, 750));
+
+      setStatus("success");
     } catch (err) {
-      console.error('Error submitting email:', err);
+      console.error("Error in handleSubmit:", err);
       setStatus("error");
-      setErrorMessage("Network error. Please check your connection and try again.");
-      posthog.capture('email_signup_failed', {
-        cta: ctaOverride || 'Founding Runner',
-        is_modal: isModal,
-        status: "network_error",
-      });
+      setErrorMessage(
+        "Something went wrong. Please check your connection and try again."
+      );
     }
   };
 
