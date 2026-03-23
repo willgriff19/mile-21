@@ -26,7 +26,7 @@ type IngredientData = {
   name: string;
   amount: string;
   headline: string;
-  description: string;
+  description: React.ReactNode;
 };
 
 type ScienceSlide = {
@@ -40,6 +40,16 @@ type ScienceSlide = {
 };
 
 const SCIENCE_SLIDES: ScienceSlide[] = [
+  {
+    focus: "RAPID FUEL DELIVERY",
+    headlineStat: "70%",
+    result: "LONGER TO EXHAUSTION",
+    takeaway: "Your fuel reaches working muscles faster, keeping energy steady when your race demands it most.",
+    proof:
+      "In a double-blind crossover study of elite swimmers, those given highly branched cyclic dextrin sustained high-intensity effort ~70% longer than those given glucose or water.",
+    citation: "Shiraki et al., Food Sci Technol Res (2015)",
+    link: "https://www.jstage.jst.go.jp/article/fstr/21/3/21_499/_html",
+  },
   {
     focus: "OXYGEN EFFICIENCY",
     headlineStat: "16%",
@@ -94,46 +104,81 @@ const SCIENCE_SLIDES: ScienceSlide[] = [
 
 const INGREDIENTS: IngredientData[] = [
   {
-    name: "L-CITRULLINE",
-    amount: "6000MG",
-    headline: "THE OXYGEN DRIVER.",
-    description:
-      'We use a full clinical 6g dose to maximize Nitric Oxide production. This dilates your blood vessels, widening the "highways" to deliver more oxygen and fuel to working muscles when the pace gets hard. No fillers, just flow.',
+    name: "NITRIC OXIDE",
+    amount: "11,000MG",
+    headline: "Three Pathways. Clinical Doses.",
+    description: (
+      <>
+        <p className="mb-3">Nitric oxide dilates blood vessels, increases oxygen delivery to working muscles, and reduces the oxygen cost of a given pace. Mile 21 stacks three sources, each working through a distinct physiological pathway, all at research-backed doses.</p>
+        <ul className="mb-3 ml-4 list-outside list-disc space-y-1">
+          <li>L-Citrulline — 6,000mg</li>
+          <li>Beet Root Powder — 4,000mg</li>
+          <li>Red Spinach Extract — 1,000mg</li>
+        </ul>
+        <p>L-Citrulline converts to arginine in the kidney and drives nitric oxide synthesis directly. Dietary nitrates from beet root are reduced to nitric oxide through a separate bacterial pathway in the mouth and gut. Red spinach extract provides a concentrated nitrate source alongside antioxidants that support vascular function. The clinical research dose for L-Citrulline is 6g. That&apos;s what&apos;s in here.</p>
+      </>
+    ),
   },
   {
-    name: "BEET ROOT POWDER",
-    amount: "4000MG",
-    headline: "THE AEROBIC BASE.",
-    description:
-      'High-grade beet extract provides a natural nitrate reservoir. This improves mitochondrial efficiency, effectively reducing the "oxygen cost" of running. It helps you hold a faster pace while burning less energy.',
+    name: "NOOTROPICS",
+    amount: "650MG",
+    headline: "Calm Mental Clarity",
+    description: (
+      <>
+        <p className="mb-3">High caffeine doses elevate heart rate — a problem during sustained aerobic effort. Mile 21 uses a lower caffeine dose paired with L-Theanine at a studied 1:2 ratio for calm, focused alertness, alongside NALT, a bioavailable form of tyrosine that supports cognitive function under physical stress.</p>
+        <ul className="mb-3 ml-4 list-outside list-disc space-y-1">
+          <li>Caffeine — 100mg</li>
+          <li>L-Theanine — 200mg</li>
+          <li>NALT (N-Acetyl L-Tyrosine) — 350mg</li>
+        </ul>
+        <p>The caffeine dose is deliberately conservative. Runners need mental sharpness that holds up over 60-90 minutes of sustained effort — not a stimulant dose built for a 45-minute lifting session.</p>
+      </>
+    ),
   },
   {
-    name: "RED SPINACH EXTRACT",
-    amount: "1000MG",
-    headline: "THE NITRATE ACCELERANT.",
-    description:
-      "Red Spinach is 4x more potent in nitrates than beets alone. This extract ensures you hit the physiological saturation point for vasodilation, keeping your legs feeling lighter deeper into the run.",
+    name: "CARBOHYDRATES",
+    amount: "18,000MG",
+    headline: "The Performance Carb.",
+    description: (
+      <>
+        <p className="mb-3">Carbohydrates are the primary fuel source for high-intensity running. Mile 21 uses Cluster Dextrin (Highly Branched Cyclic Dextrin), a carbohydrate with extremely low osmolality that clears the stomach rapidly without the bloating or GI distress associated with simple sugars or maltodextrin.</p>
+        <ul className="mb-3 ml-4 list-outside list-disc space-y-1">
+          <li>Cluster Dextrin (HBCD) — 18,000mg</li>
+        </ul>
+        <p>Pre-race carb loading and nitrate loading are both established performance protocols. Combining them in a single scoop means one less thing to manage on race morning.</p>
+      </>
+    ),
   },
   {
-    name: "CAFFEINE + L-THEANINE",
-    amount: "100MG : 200MG",
-    headline: "THE 1:2 GOLDEN RATIO.",
-    description:
-      'We pair 100mg of Caffeine (kinetic energy) with 200mg of L-Theanine (calm focus) to neutralize the jitters. The result is "Alpha Wave" focus—alertness without the anxiety or heart rate spikes.',
-  },
-  {
-    name: "ELECTROLYTE MIX",
-    amount: "1000MG",
-    headline: "HYDRATION FUEL.",
-    description:
-      "A precision 1000mg hydration stack. We include 500mg of Potassium Citrate to regulate muscle firing and prevent 'dead legs.' The remaining 500mg is a specific Sodium blend: 333mg of Sodium Citrate for gentle, non-acidic absorption and 167mg of Sodium Chloride for fluid balance. This 2/3 to 1/3 sodium ratio is designed to be easier on the stomach while replacing exactly what you sweat out.",
+    name: "ELECTROLYTES",
+    amount: "1,000MG",
+    headline: "Clean Hydration",
+    description: (
+      <>
+        <p className="mb-3">Electrolyte loss during running impairs muscle contraction and accelerates cramping. Mile 21 uses a simple, fully disclosed blend in bioavailable forms.</p>
+        <ul className="mb-3 ml-4 list-outside list-disc space-y-1">
+          <li>Sodium Citrate — 250mg</li>
+          <li>Pink Sea Salt — 250mg</li>
+          <li>Potassium Citrate — 500mg</li>
+        </ul>
+        <p>A 2005 study in the Journal of Athletic Training found subjects ran 2.5x longer before cramping with electrolyte loading compared to without. Every milligram here is on the label.</p>
+      </>
+    ),
   },
   {
     name: "GI SUPPORT",
-    amount: "3000MG",
-    headline: "GASTRIC PEACE.",
-    description:
-      "Built to eliminate mid-run GI distress. We include 3000mg of L-Glutamine to support the gut barrier and a dash of ginger to settle the stomach. This combination ensures your GI system stays calm and your stomach feels good during high-intensity efforts, from the first mile to the finish line.",
+    amount: "4,575MG",
+    headline: "Nausea-free Benefits",
+    description: (
+      <>
+        <p className="mb-3">Gastrointestinal distress is the most common reason runners drop from races — and a primary reason runners avoid pre-workout supplements altogether. L-Glutamine supports intestinal lining integrity under physical stress. Ginger has well-documented effects on gastric motility and nausea during exercise.</p>
+        <ul className="mb-3 ml-4 list-outside list-disc space-y-1">
+          <li>L-Glutamine — 4,000mg</li>
+          <li>Ginger — 575mg</li>
+        </ul>
+        <p>The rest of the ingredients in this formula are only effective if your stomach tolerates them. This blend exists to make sure it does.</p>
+      </>
+    ),
   },
 ];
 
@@ -209,12 +254,12 @@ function IngredientRow({ data, isOpen, onToggle }: IngredientRowProps) {
               >
                 {data.headline}
               </p>
-              <p
+              <div
                 className="mt-2 font-sans leading-relaxed text-[var(--light)] opacity-90"
                 style={{ fontSize: "clamp(0.625rem, 1.2vw, 0.875rem)" }}
               >
                 {data.description}
-              </p>
+              </div>
             </div>
           </motion.div>
         )}

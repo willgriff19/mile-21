@@ -1,22 +1,41 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Local Development
 
-First, run the development server:
+To run this project locally, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Install Dependencies**
+   First, ensure all dependencies are installed:
+   ```bash
+   npm install
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Run the Development Server**
+   Start the local development server:
+   ```bash
+   npm run dev
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **View the App**
+   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+### Troubleshooting Local Deployment
+
+If you encounter issues running the app locally (e.g., the server starts but hangs indefinitely without loading pages, or throws `MODULE_NOT_FOUND` errors inside `next/dist`):
+
+1. **Clean Reinstall:** The `node_modules` folder or `.next` cache might be corrupted. Run the following to reset your environment:
+   ```bash
+   rm -rf node_modules package-lock.json .next
+   npm install
+   npm run dev
+   ```
+
+2. **Port Conflicts:** If port 3000 is blocked or a previous Next.js instance crashed and left a lock file, kill the stale processes:
+   ```bash
+   lsof -ti :3000 | xargs kill -9
+   # or
+   npx kill-port 3000
+   ```
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 

@@ -35,6 +35,11 @@ const FAQS: FAQItem[] = [
       "Yes. Mile 21 is designed to complement your existing race nutrition strategy. The electrolytes (sodium and potassium) work alongside what you'll get from gels and sports drinks. Just be mindful of total caffeine intake if your gels also contain caffeine.",
   },
   {
+    question: "Why does Mile 21 include carbohydrates?",
+    answer:
+      "Mile 21 includes 18g of Cluster Dextrin (Highly Branched Cyclic Dextrin), a performance carbohydrate engineered for endurance athletes. Unlike simple sugars or maltodextrin, Cluster Dextrin has extremely low osmolality, which means it clears your stomach rapidly and won't cause the bloating or GI distress that derails race-day nutrition. It provides steady fuel without blood sugar spikes or crashes. We included it because nitrate loading and carb loading are both proven pre-race protocols — Mile 21 lets you do both in a single scoop 30–45 minutes before you run.",
+  },
+  {
     question: "Does it cause the tingles like other pre-workouts?",
     answer:
       "No. The tingling sensation (paresthesia) comes from Beta-Alanine, which we intentionally exclude from our formula. Beta-Alanine is designed for short burst efforts like weight lifting sets—it provides no benefit for endurance running and many runners find it uncomfortable and distracting.",
