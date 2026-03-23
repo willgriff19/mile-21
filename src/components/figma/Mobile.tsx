@@ -549,7 +549,7 @@ export function Mobile() {
                 className="mt-4 max-w-[480px] font-sans leading-relaxed text-[var(--light)] opacity-70 sm:mt-10 lg:mx-0"
                 style={{ fontSize: "clamp(0.875rem, 1.5vw, 1.0625rem)" }}
               >
-                Every ingredient your body needs. You&apos;ll never want to run without it.
+                Every ingredient your body needs to run your best.
               </p>
 
               {/* CTA */}
