@@ -104,7 +104,7 @@ const SCIENCE_SLIDES: ScienceSlide[] = [
 
 const INGREDIENTS: IngredientData[] = [
   {
-    name: "NITRIC OXIDE",
+    name: "OXYGEN DELIVERY",
     amount: "11,000MG",
     headline: "Three Pathways. Clinical Doses.",
     description: (
@@ -120,7 +120,7 @@ const INGREDIENTS: IngredientData[] = [
     ),
   },
   {
-    name: "NOOTROPICS",
+    name: "CALM FOCUS",
     amount: "650MG",
     headline: "Calm Mental Clarity",
     description: (
@@ -136,7 +136,7 @@ const INGREDIENTS: IngredientData[] = [
     ),
   },
   {
-    name: "CARBOHYDRATES",
+    name: "FAST FUEL",
     amount: "18,000MG",
     headline: "The Performance Carb.",
     description: (
@@ -150,7 +150,7 @@ const INGREDIENTS: IngredientData[] = [
     ),
   },
   {
-    name: "ELECTROLYTES",
+    name: "CRAMP DEFENSE",
     amount: "1,000MG",
     headline: "Clean Hydration",
     description: (
@@ -166,7 +166,7 @@ const INGREDIENTS: IngredientData[] = [
     ),
   },
   {
-    name: "GI SUPPORT",
+    name: "GUT PROTECTION",
     amount: "4,575MG",
     headline: "Nausea-free Benefits",
     description: (
